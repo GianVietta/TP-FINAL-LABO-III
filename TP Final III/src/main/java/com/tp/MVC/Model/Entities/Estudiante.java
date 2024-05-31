@@ -44,6 +44,6 @@ public class Estudiante extends Persona implements Comparable<Estudiante> {
 
     @Override
     public int compareTo(Estudiante o) {
-        return this.getId().compareTo(o.getId());
+        return this.getDni().compareTo(o.getDni());
     }
 }

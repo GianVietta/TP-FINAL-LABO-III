@@ -20,19 +20,19 @@ public class EstudianteRepository implements IRepository {
     }
 
     public TreeSet<Estudiante> getArbolEstudiante() {
-        return arbolEstudiante;
+        return this.arbolEstudiante;
     }
 
     public void setArbolEstudiante(TreeSet<Estudiante> arbolEstudiante) {
         this.arbolEstudiante = arbolEstudiante;
     }
 
-     void cargarArbol(){
+     public void cargarArbol(){
         try(Reader reader = new FileReader(PATH)) {
         Type treeType = new TypeToken<TreeSet<Estudiante>>() {}.getType();
-        arbolEstudiante=gson.fromJson(reader,treeType);
+        this.arbolEstudiante=gson.fromJson(reader,treeType);
         if (arbolEstudiante==null){
-            arbolEstudiante=new TreeSet<>();
+            this.arbolEstudiante=new TreeSet<>();
         }
 
         }catch (FileNotFoundException ex){
@@ -42,16 +42,24 @@ public class EstudianteRepository implements IRepository {
         }
      }
 
+     public void guardarEstudiantes(){
+        try(Writer writer = new FileWriter(PATH)){
+            gson.toJson(this.arbolEstudiante,writer);
+        }catch(IOException io){
+            System.out.println("ERROR: "+io.getMessage());
+        }
+     }
+
     @Override
     public void add(Object obj) {
         this.arbolEstudiante.add((Estudiante)obj);
     }
 
     @Override
-    public Object consult(Integer id) {
-     Estudiante aux = new Estudiante(id);
+    public Object consult(Integer dni) {
+     Estudiante aux = new Estudiante(dni);
      Estudiante encontrado=this.arbolEstudiante.ceiling(aux);
-     if (encontrado!=null&&encontrado.getId().equals(id)){
+     if (encontrado!=null&&encontrado.getDni().equals(dni)){
          return encontrado;
      }
          return null;

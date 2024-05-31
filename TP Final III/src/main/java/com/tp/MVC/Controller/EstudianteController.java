@@ -21,13 +21,13 @@ public class EstudianteController {
 
 
     public void editarEstudiante(){
-        Integer id = estudiantView.pedirID(this.estudianteRepository);
-        Estudiante estudiante=(Estudiante) estudianteRepository.consult(id);
+        Integer dni = estudiantView.pedirDNI(this.estudianteRepository);
+        Estudiante estudiante=(Estudiante) estudianteRepository.consult(dni);
         if (estudiante!=null){
             estudiante=estudiantView.elegirMod(estudiante);
             estudianteRepository.update(estudiante);
         }else{
-            estudiantView.errorIdnoEncontrado();
+            estudiantView.errorDNI();
         }
     }
 

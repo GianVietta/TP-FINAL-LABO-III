@@ -8,20 +8,17 @@ import java.util.Scanner;
 
 public class EstudiantView {
 
-        public Integer pedirID(EstudianteRepository estudianteRepository){
+        public Integer pedirDNI(EstudianteRepository estudianteRepository){
         estudianteRepository.mostrarTodos();
-            System.out.print("Ingrese el identificador del estudiante deseado: ");
+            System.out.print("Ingrese el numero de documento del estudiante deseado: ");
             Scanner scan=new Scanner(System.in);
-            Integer id=scan.nextInt();
+            Integer dni=scan.nextInt();
             scan.nextLine();
-            return id;
+            return dni;
         }
-
-        public void errorIdnoEncontrado(){
-            System.out.println("EL ESTUDIANTE DESEADO NO SE ENCONTRO EN NUESTRO SISTEMA");
-            //PASAR A EXCEPCION
+        public void errorDNI(){
+            System.out.println("NO SE ENCONTRO ESTUDIANTE CON ESE DNI");
         }
-
         public Estudiante nuevoEstudiante(){
                 Scanner scanner = new Scanner(System.in);
                 System.out.println("Ingrese datos del estudiante: ");
