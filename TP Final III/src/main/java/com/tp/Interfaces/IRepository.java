@@ -1,9 +1,9 @@
 package com.tp.Interfaces;
 
-public interface IRepository {
-    void add(Object obj);
-    Object consult(Integer id);
-    void remove(Object obj);
-    void update(Object obj);
+public interface IRepository<T> {
+    void add(T t);
+    T consult(Integer id);
+    void remove(T t);
+    void update(T t);
 
 }

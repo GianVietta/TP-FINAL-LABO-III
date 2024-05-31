@@ -4,10 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.tp.MVC.Model.Entities.Administrativo;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.Reader;
+import java.io.*;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
@@ -33,5 +30,15 @@ public class AdministrativoRepository {
             System.out.println("ERROR: "+io.getMessage());
         }
     }
+
+    public void saveAdmins(){
+        try(Writer writer = new FileWriter(PATH)){
+            gson.toJson(this.administrativos,writer);
+        }catch (IOException io){
+            System.out.println("ERRO: "+io.getMessage());
+        }
+    }
+
+
 
 }
