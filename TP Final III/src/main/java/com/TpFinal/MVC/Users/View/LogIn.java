@@ -2,19 +2,16 @@ package com.TpFinal.MVC.Users.View;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.net.http.WebSocket;
 
 public class LogIn extends JFrame{
     private JLabel jLabel1;
     private JPanel LogInPannel;
     private JButton registerBtn;
-    private JButton iniciarSeccionBtn;
+    private JButton logInBtn;
     private JTextField txtUser;
     private JPasswordField txtPasword;
     private JLabel Title;
@@ -37,8 +34,8 @@ public class LogIn extends JFrame{
         this.setVisible(true);
     }
 
-    public void iniciarSeccionListener(ActionListener listener){
-        iniciarSeccionBtn.addActionListener(listener);
+    public void logInListener(ActionListener listener){
+        logInBtn.addActionListener(listener);
     }
 
     public void registerSeccionListener(ActionListener listener){

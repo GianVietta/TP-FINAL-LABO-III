@@ -21,7 +21,7 @@ public class UserController {
         this.usersRepository = usersRepository;
     }
 
-    public void iniciarSeccion() {
+    public void logIn() {
         LogIn logIn = new LogIn();
 
         class logInListener implements ActionListener {
@@ -63,7 +63,7 @@ public class UserController {
         }
 
         logIn.registerSeccionListener(new registerSeccionListener());
-        logIn.iniciarSeccionListener(new logInListener());
+        logIn.logInListener(new logInListener());
         logIn.setVisible(true);
     }
 
@@ -90,7 +90,7 @@ public class UserController {
                              if (contraseña.equals(new String(txtPaswordConfirm.getPassword()))){
                                  usersRepository.add(new User(nombre,contraseña,email));
                                  usersRepository.saveUsers();
-                                 iniciarSeccion();
+                                 logIn();
                                  register.setVisible(false);
                              }else {
                                  JOptionPane.showMessageDialog(null,"LAS CONTRASEÑAS NO COINSIDEN");
@@ -113,7 +113,7 @@ public class UserController {
             @Override
             public void actionPerformed(ActionEvent e) {
                 register.setVisible(false);
-                iniciarSeccion();
+                logIn();
             }
         }
 

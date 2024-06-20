@@ -9,6 +9,6 @@ public class Main {
     public static void main(String[] args) {
         UsersRepository usersRepository = new UsersRepository();
         UserController userController = new UserController(usersRepository);
-        userController.iniciarSeccion();
+        userController.logIn();
     }
 }
