@@ -1,38 +1,46 @@
 package com.TpFinal.MVC.Materia.model.Entity;
 
-import com.TpFinal.MVC.Estudiante.model.entity.Estudiante;
-import com.TpFinal.MVC.Profesor.model.entity.Profesor;
+import com.TpFinal.MVC.Comision.entity.Comision;
 
 import java.util.HashMap;
 
 public class Materia {
-    private Profesor profesor;
-    private String nombreMateria;
+    private String nombre;
+    private Integer codigo;
+    private HashMap<Integer, Comision> mapComisiones;
+
     private Integer id;
+
     private static Integer idAcc;
-    private HashMap<Estudiante,Integer> mapEstudiantes;
 
-    public Materia(Profesor profesor, String nombreMateria) {
-        this.profesor = profesor;
-        this.nombreMateria = nombreMateria;
-        this.id = idAcc++;
-        this.mapEstudiantes=new HashMap<>();
+    public Materia(String nombre, Integer codigo) {
+        this.nombre = nombre;
+        this.codigo = codigo;
+        this.mapComisiones=new HashMap<>();
     }
 
-    public Profesor getProfesor() {
-        return profesor;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setProfesor(Profesor profesor) {
-        this.profesor = profesor;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public String getNombreMateria() {
-        return nombreMateria;
+    public Integer getCodigo() {
+        return codigo;
     }
 
-    public void setNombreMateria(String nombreMateria) {
-        this.nombreMateria = nombreMateria;
+    public void setCodigo(Integer codigo) {
+        this.codigo = codigo;
+    }
+
+    public HashMap<Integer, Comision> getMapComisiones() {
+        return mapComisiones;
+    }
+
+    public void setMapComisiones(HashMap<Integer, Comision> mapComisiones) {
+        this.mapComisiones = mapComisiones;
     }
 
     public Integer getId() {
@@ -43,12 +51,8 @@ public class Materia {
         this.id = id;
     }
 
-    public HashMap<Estudiante, Integer> getMapEstudiantes() {
-        return mapEstudiantes;
-    }
-
-    public void setMapEstudiantes(HashMap<Estudiante, Integer> mapEstudiantes) {
-        this.mapEstudiantes = mapEstudiantes;
+    public static Integer getIdAcc() {
+        return idAcc;
     }
 
     public static void setIdAcc(Integer idAcc) {

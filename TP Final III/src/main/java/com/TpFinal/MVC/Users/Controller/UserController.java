@@ -121,7 +121,7 @@ public class UserController {
                  try {
                      if (max<txtDNI.getText().length()){
                      throw new MaxDigitsException("SE HAN SUPERADO EL MAXIMO DE DIGITOS DEL DNI");
-                 }
+                    }
                      Integer dni = Integer.valueOf(txtDNI.getText());
 
                      Estudiante est = estudiantes.find(new Estudiante(dni));

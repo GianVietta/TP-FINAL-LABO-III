@@ -18,13 +18,13 @@ public class LogIn extends JFrame{
     private JLabel Title;
 
     public LogIn() {
-        try {
-            BufferedImage imagen = ImageIO.read(new File("src/imagenes/Logo.png"));
-            this.setIconImage(imagen);
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+     // try {
+     //     BufferedImage imagen = ImageIO.read(new File("src/imagenes/Logo.png"));
+     //    this.setIconImage(imagen);
+     //
+     // } catch (IOException e) {
+     //     throw new RuntimeException(e);
+     // }
         this.txtUser.setForeground(Color.white);
         this.txtPasword.setForeground(Color.white);
         this.setTitle("STG-GESTION DE ESTUDIANTES");

@@ -20,12 +20,12 @@ public class Register extends JFrame{
 
 
     public Register() {
-        try {
-            BufferedImage imagen = ImageIO.read(new File("src/imagenes/Logo.png"));
-            this.setIconImage(imagen);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+     //   try {
+     //       BufferedImage imagen = ImageIO.read(new File("src/imagenes/Logo.png"));
+     //       this.setIconImage(imagen);
+     //   } catch (IOException e) {
+     //       throw new RuntimeException(e);
+     //   }
         this.txtDni.setForeground(Color.white);
         this.txtEmail.setForeground(Color.white);
         this.txtUsuario.setForeground(Color.white);
