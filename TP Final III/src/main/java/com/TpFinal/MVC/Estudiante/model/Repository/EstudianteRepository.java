@@ -1,9 +1,10 @@
-package com.TpFinal.MVC.Estudiante.model;
+package com.TpFinal.MVC.Estudiante.model.Repository;
 
+import com.TpFinal.AbstractClass.Persona;
 import com.TpFinal.Interdafaces.IRepository;
+import com.TpFinal.MVC.Estudiante.model.entity.Estudiante;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.TpFinal.MVC.Estudiante.view.EstudiantView;
 
 import java.io.*;
 import java.lang.reflect.Type;
@@ -16,6 +17,16 @@ public class EstudianteRepository implements IRepository<Estudiante> {
 
     public EstudianteRepository() {
         loadTree();
+        setIdACC();
+    }
+    public void setIdACC(){
+      Integer id= Persona.getIdAcumulable();
+      for (Estudiante e : this.arbolEstudiante){
+          if (id<e.getId()){
+              id=e.getId();
+          }
+      }
+      Persona.setIdAcumulable(id);
     }
 
     public void loadTree(){
@@ -74,17 +85,8 @@ public class EstudianteRepository implements IRepository<Estudiante> {
         return null;
     }
 
-    public void mostrarTodos(){;
-        EstudiantView estudiantView=new EstudiantView();
-        for (Estudiante estudiante : this.arbolEstudiante) {
-            estudiantView.mostrarEstudiante(estudiante);
-        }
-    }
 
-
-
-
-    }
+}
 
 
 

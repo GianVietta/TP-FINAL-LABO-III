@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="6f8f930c-4b5d-46f4-9679-6296f3364f51" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/imagenes/Fondo.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/TpFinal/Exceptions/DontMatchException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/TpFinal/Exceptions/MaxDigitsException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/TpFinal/MVC/Administrativo/model/Entity/Admin.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/TpFinal/MVC/Administrativo/model/repository/AdminRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/TpFinal/MVC/Administrativo/view/MenuPrincipalAdmins.form" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/TpFinal/MVC/Administrativo/view/MenuPrincipalAdmins.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/TpFinal/MVC/Materia/model/repository/MateriaRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/TpFinal/MVC/Profesor/model/entity/Profesor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/TpFinal/MVC/Profesor/model/repository/ProfesorRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Materias.Json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/TpFinal/AbstractClass/Persona.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/TpFinal/AbstractClass/Persona.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/TpFinal/MVC/Administrativo/controller/administrativoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/TpFinal/MVC/Administrativo/controller/AdminController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/TpFinal/MVC/Administrativo/model/Entity/admin.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/TpFinal/MVC/Administrativo/model/repository/adminRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/TpFinal/MVC/Administrativo/view/adminView.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/TpFinal/MVC/Estudiante/model/Estudiante.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/TpFinal/MVC/Estudiante/model/entity/Estudiante.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/TpFinal/MVC/Estudiante/model/EstudianteRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/TpFinal/MVC/Estudiante/model/Repository/EstudianteRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/TpFinal/MVC/Estudiante/view/EstudiantView.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/TpFinal/MVC/Users/Controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/TpFinal/MVC/Users/Controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/TpFinal/MVC/Users/Model/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/TpFinal/MVC/Users/Model/entity/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/TpFinal/MVC/Users/Model/repository/UsersRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/TpFinal/MVC/Users/Model/repository/UsersRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/TpFinal/MVC/Users/View/LogIn.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/TpFinal/MVC/Users/View/LogIn.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/TpFinal/MVC/Users/View/LogIn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/TpFinal/MVC/Users/View/LogIn.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/TpFinal/MVC/Users/View/Register.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/TpFinal/MVC/Users/View/Register.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/TpFinal/MVC/Users/View/Register.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/TpFinal/MVC/Users/View/Register.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/TpFinal/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/TpFinal/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/TpFinal/AbstractClass/Persona.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/TpFinal/AbstractClass/Persona.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/TpFinal/MVC/Administrativo/controller/administrativoController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/TpFinal/MVC/Administrativo/model/Entity/admin.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/TpFinal/MVC/Administrativo/model/Entity/admin.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/TpFinal/MVC/Administrativo/model/repository/adminRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/TpFinal/MVC/Administrativo/model/repository/adminRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/TpFinal/MVC/Administrativo/view/adminView.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/TpFinal/MVC/Estudiante/model/Estudiante.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/TpFinal/MVC/Estudiante/model/EstudianteRepository$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/TpFinal/MVC/Estudiante/model/EstudianteRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/TpFinal/MVC/Estudiante/view/EstudiantView.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/TpFinal/MVC/Users/Controller/UserController$1AlreadyRegisterListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/TpFinal/MVC/Users/Controller/UserController$1AlreadyRegisterListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/TpFinal/MVC/Users/Controller/UserController$1RegisterListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/TpFinal/MVC/Users/Controller/UserController$1RegisterListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/TpFinal/MVC/Users/Controller/UserController$1logInListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/TpFinal/MVC/Users/Controller/UserController$1logInListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/TpFinal/MVC/Users/Controller/UserController$1registerSeccionListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/TpFinal/MVC/Users/Controller/UserController$1registerSeccionListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/TpFinal/MVC/Users/Controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/TpFinal/MVC/Users/Controller/UserController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/TpFinal/MVC/Users/Model/entity/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/TpFinal/MVC/Users/Model/entity/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/TpFinal/MVC/Users/Model/repository/UsersRepository$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/TpFinal/MVC/Users/Model/repository/UsersRepository$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/TpFinal/MVC/Users/Model/repository/UsersRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/TpFinal/MVC/Users/Model/repository/UsersRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/TpFinal/MVC/Users/View/LogIn.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/TpFinal/MVC/Users/View/LogIn.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/TpFinal/MVC/Users/View/Register.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/TpFinal/MVC/Users/View/Register.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/TpFinal/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/TpFinal/Main.class" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 7
+}</component>
+  <component name="ProjectId" id="2i86aaqlWPm5acdCXMZqV2Yvit5" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "UI_DESIGNER_EDITOR_MODE.PaletteManager.WIDTH": "133",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/Usuario/Desktop/Gian/TpFinal/TP Final III/src/imagenes",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "inlay.hints"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Usuario\Desktop\Gian\TpFinal\TP Final III\src\imagenes" />
+      <recent name="C:\Users\Usuario\Desktop\Gian\TpFinal\TP Final III\src\main\java\com\TpFinal\MVC\Materia" />
+      <recent name="C:\Users\Usuario\Desktop\Gian\TpFinal\TP Final III\src" />
+      <recent name="C:\Users\Usuario\Desktop\Gian\TpFinal\TP Final III\src\main\java" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.TpFinal.Main" />
+      <module name="TP_Final_III" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.TpFinal.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="6f8f930c-4b5d-46f4-9679-6296f3364f51" name="Changes" comment="" />
+      <created>1718859922774</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1718859922774</updated>
+    </task>
+    <servers />
+  </component>
+</project>

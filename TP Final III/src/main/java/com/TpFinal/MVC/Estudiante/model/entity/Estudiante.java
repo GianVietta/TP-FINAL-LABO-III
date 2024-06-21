@@ -1,4 +1,4 @@
-package com.TpFinal.MVC.Estudiante.model;
+package com.TpFinal.MVC.Estudiante.model.entity;
 
 
 import com.TpFinal.AbstractClass.Persona;
@@ -7,24 +7,27 @@ import com.TpFinal.AbstractClass.Persona;
 public class Estudiante extends Persona implements Comparable<Estudiante> {
     private String carrera;
     private Integer legajo;
-    private static int permisos=2;
+    private int permisos;
+    private static int permisosDef=2;
 
     public Estudiante(String nombre, String apellido, Integer dni, Integer legajo, String carrera) {
         super(nombre, apellido, dni);
         this.legajo = legajo;
         this.carrera = carrera;
+        this.permisos=permisosDef;
     }
 
-    public Estudiante(Integer id) {
-        super(id);
+    public Estudiante(Integer dni) {
+        super(dni);
     }
 
-    public static int getPermisos() {
+
+    public  int getPermisos() {
         return permisos;
     }
 
     public static void setPermisos(int permisos) {
-        Estudiante.permisos = permisos;
+        Estudiante.permisosDef = permisos;
     }
 
     public String getCarrera() {

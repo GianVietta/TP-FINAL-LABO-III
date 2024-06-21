@@ -2,6 +2,7 @@ package com.TpFinal.MVC.Users.View;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -24,7 +25,8 @@ public class LogIn extends JFrame{
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
+        this.txtUser.setForeground(Color.white);
+        this.txtPasword.setForeground(Color.white);
         this.setTitle("STG-GESTION DE ESTUDIANTES");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setBounds(600,200,650,300);

@@ -2,6 +2,7 @@ package com.TpFinal.MVC.Users.View;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -15,6 +16,7 @@ public class Register extends JFrame{
     private JButton registerBtn;
     private JPasswordField txtPaswordConfirm;
     private JButton alreadyRegisterBtn;
+    private JTextField txtDni;
 
 
     public Register() {
@@ -24,6 +26,11 @@ public class Register extends JFrame{
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        this.txtDni.setForeground(Color.white);
+        this.txtEmail.setForeground(Color.white);
+        this.txtUsuario.setForeground(Color.white);
+        this.txtPasword.setForeground(Color.white);
+        this.txtPaswordConfirm.setForeground(Color.white);
         this.setTitle("STG-GESTION DE ESTUDIANTES");
         this.setTitle("STG-GESTION DE ESTUDIANTES");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -53,6 +60,10 @@ public class Register extends JFrame{
 
     public JPasswordField getTxtPaswordConfirm() {
         return txtPaswordConfirm;
+    }
+
+    public JTextField getTxtDni() {
+        return txtDni;
     }
 }
 

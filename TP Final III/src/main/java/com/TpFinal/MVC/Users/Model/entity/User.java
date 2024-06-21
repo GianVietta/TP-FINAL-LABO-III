@@ -2,24 +2,38 @@ package com.TpFinal.MVC.Users.Model.entity;
 
 import java.util.Objects;
 
-public class User{
+public class User<T>{
     private String user;
     private String pasword;
     private String email;
     private Integer id;
+    private T t;
     private static Integer idAcc = 1;
 
 
-    public User(String user, String pasword, String email) {
+    public User(String user, String pasword, String email, T t) {
         this.user = user;
         this.pasword = pasword;
         this.email=email;
         this.id = idAcc++;
+        this.t = t;
+    }
+
+    public User(T t) {
+        this.t = t;
     }
 
     public User(String user, String pasword) {
         this.user = user;
         this.pasword = pasword;
+    }
+
+    public T getT() {
+        return t;
+    }
+
+    public void setT(T t) {
+        this.t = t;
     }
 
     public User(String user) {

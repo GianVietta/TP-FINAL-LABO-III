@@ -10,8 +10,8 @@ public class Persona {
      private Integer id;
      static Integer idAcumulable = 1;
 
-    public Persona(Integer id) {
-        this.id = id;
+    public Persona(Integer dni) {
+        this.dni = dni;
     }
 
     public Persona(String nombre, String apellido, Integer dni) {
@@ -20,6 +20,8 @@ public class Persona {
         this.dni = dni;
         this.id=idAcumulable++;
     }
+
+
 
     public String getNombre() {
         return nombre;
@@ -51,6 +53,10 @@ public class Persona {
 
     public static void setIdAcumulable(Integer idAcumulable) {
         Persona.idAcumulable = idAcumulable;
+    }
+
+    public static Integer getIdAcumulable() {
+        return idAcumulable;
     }
 
     public void setId(Integer id) {
