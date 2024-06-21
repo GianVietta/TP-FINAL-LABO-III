@@ -43,8 +43,6 @@ public class UserController {
 
 
             @Override
-
-
             public void actionPerformed(ActionEvent e) {
                 JTextField txtUser = logIn.getTxtUser();
                 JPasswordField txtPasword = logIn.getTxtPasword();
