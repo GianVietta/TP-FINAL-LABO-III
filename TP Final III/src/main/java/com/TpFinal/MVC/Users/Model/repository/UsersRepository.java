@@ -15,7 +15,7 @@ import java.util.HashSet;
 public class UsersRepository implements IRepository<User<?>> {
     private HashSet<User<?>> setUsuarios;
     private Gson gson = new Gson();
-    private static String PATH = "src/main/resources/Users.json";
+    private static String PATH = "TP Final III/src/main/resources/Users.json";
 
 
     public UsersRepository() {

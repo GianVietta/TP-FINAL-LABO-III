@@ -26,15 +26,10 @@ public class Main {
         EstudianteController estudianteController = new EstudianteController(estudianteRepository,materiaRepository);
         MateriaController materiaController = new MateriaController(materiaRepository,profesorRepository);
 
-      Admin a = new Admin("Gian","Vietta",46420089);
-      adminRepository.add(a);
-      usersRepository.add(new User<Admin>("Gian","Hola123","Gianfvietta07@gmail.com",a));
-      usersRepository.saveUsers();
-      adminRepository.saveList();
       UserController userController = new UserController(usersRepository,profesorRepository,estudianteRepository);
         AdminController adminController = new AdminController(profesorControler,estudianteController,materiaController,adminRepository);
       User<?> u=userController.logIn();
-      if (u.getT() instanceof Admin){
+      if (){
           Admin ad =(Admin) u.getT();
           System.out.println(ad.getPermisos());
           System.out.println(ad.getDni());
