@@ -80,7 +80,7 @@ public class AdminController {
         menuAdmin.viewProListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                profesorControler.viewProfesor();
+                profesorControler.listaProfesores();
             }
         });
 

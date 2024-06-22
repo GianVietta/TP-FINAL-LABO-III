@@ -30,8 +30,6 @@ public class ModEstudiante extends JFrame{
         this.setBounds(600,200,650,300);
         this.add(ModEst);
         this.setVisible(true);
-
-
     }
 
     public JTextField getTxtCarrera() {

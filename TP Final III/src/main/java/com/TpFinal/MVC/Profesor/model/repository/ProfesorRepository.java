@@ -76,4 +76,8 @@ public class ProfesorRepository implements IRepository<Profesor> {
         }
         return null;
     }
+
+    public HashSet<Profesor> getProfesorHashSet() {
+        return profesorHashSet;
+    }
 }

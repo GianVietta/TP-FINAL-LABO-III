@@ -30,12 +30,12 @@ public class Main {
         MateriaController materiaController = new MateriaController(materiaRepository,profesorRepository);
       UserController userController = new UserController(usersRepository,profesorRepository,estudianteRepository);
         AdminController adminController = new AdminController(profesorControler,estudianteController,materiaController,adminRepository);
-        Admin admin = new Admin("Gian","Vietta",46420089);
-        User<Admin> userAd= new User<>("Gian","1234","gianfvietta07@gmail.com",admin);
-        adminRepository.add(admin);
-        adminRepository.saveList();
-        usersRepository.add(userAd);
-        usersRepository.saveUsers();
+       // Admin admin = new Admin("Gian","Vietta",46420089);
+       // User<Admin> userAd= new User<>("Gian","1234","gianfvietta07@gmail.com",admin);
+       //  adminRepository.add(admin);
+       //  adminRepository.saveList();
+       //  usersRepository.add(userAd);
+       //  usersRepository.saveUsers();
 
         User<?> u=userController.logIn();
 
@@ -49,8 +49,5 @@ public class Main {
       }          else {
           System.out.println(u.getT());
       }
-
-
-
     }
 }
