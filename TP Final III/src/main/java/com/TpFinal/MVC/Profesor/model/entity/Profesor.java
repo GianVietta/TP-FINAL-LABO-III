@@ -17,6 +17,10 @@ public class Profesor extends Persona {
         super(dni);
     }
 
+    public Profesor() {
+        super();
+    }
+
     public String getEspecialidad() {
         return especialidad;
     }
@@ -27,5 +31,9 @@ public class Profesor extends Persona {
 
     public static Integer getPermisos() {
         return permisosDef;
+    }
+
+    public void setPermisos(int i) {
+        this.permisos=i;
     }
 }

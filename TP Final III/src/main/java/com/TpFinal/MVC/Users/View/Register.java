@@ -32,7 +32,6 @@ public class Register extends JFrame{
         this.txtPasword.setForeground(Color.white);
         this.txtPaswordConfirm.setForeground(Color.white);
         this.setTitle("STG-GESTION DE ESTUDIANTES");
-        this.setTitle("STG-GESTION DE ESTUDIANTES");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setBounds(600,200,450,325);
         this.add(registerPannel);

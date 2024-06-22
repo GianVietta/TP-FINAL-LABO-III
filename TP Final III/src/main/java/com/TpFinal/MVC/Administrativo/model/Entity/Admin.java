@@ -14,5 +14,11 @@ public class Admin extends Persona {
         return permisos;
     }
 
+    public void setPermisos(int permisos) {
+        this.permisos = permisos;
+    }
 
+    public Admin() {
+        super();
+    }
 }

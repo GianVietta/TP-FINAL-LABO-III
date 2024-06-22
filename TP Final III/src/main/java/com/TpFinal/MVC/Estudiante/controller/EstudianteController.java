@@ -1,12 +1,16 @@
 package com.TpFinal.MVC.Estudiante.controller;
 
 import com.TpFinal.Exceptions.AlreadyExistException;
+import com.TpFinal.Exceptions.DontExistException;
 import com.TpFinal.Exceptions.EmptyFieldException;
 import com.TpFinal.Exceptions.InvalidNumberException;
 import com.TpFinal.MVC.Administrativo.view.MenuAdmin;
 import com.TpFinal.MVC.Estudiante.model.Repository.EstudianteRepository;
 import com.TpFinal.MVC.Estudiante.model.entity.Estudiante;
 import com.TpFinal.MVC.Estudiante.view.CreateEstudiant;
+import com.TpFinal.MVC.Estudiante.view.ListadoEstudiantes;
+import com.TpFinal.MVC.Estudiante.view.ModEstudiante;
+import com.TpFinal.MVC.Estudiante.view.RemoveEstudiante;
 import com.TpFinal.MVC.Materia.model.repository.MateriaRepository;
 
 import javax.swing.*;
@@ -84,7 +88,7 @@ public class EstudianteController {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-               createEstudiant.setVisible(false);
+               createEstudiant.dispose();
             }
         }
 
@@ -114,16 +118,240 @@ public class EstudianteController {
     }
 
     public void removeEstudiante() {
-        JOptionPane.showMessageDialog(null,"CREACION EN PROCESO");
+        RemoveEstudiante removeEstudiante = new RemoveEstudiante();
+        Estudiante estudiante;
+        class BuscarBtnListener implements ActionListener{
+            Estudiante est=null;
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try{
+                    JTextField txtSearchDni = removeEstudiante.getTxtSeatchDni();
+                    if (!txtSearchDni.getText().isEmpty()){
+                        Integer dni = Integer.valueOf(txtSearchDni.getText());
 
+                        est =estudianteRepository.find(new Estudiante(dni));
+                        if (est!=null){
+                            JTextField txtNombre = removeEstudiante.getTxtNombre();
+                            JTextField txtApellido = removeEstudiante.getTxtApellido();
+                            JTextField txtDni = removeEstudiante.getTxtDni();
+                            JTextField txtLegajo = removeEstudiante.getTxtLegajo();
+                            JTextField txtCarrera = removeEstudiante.getTxtCarrera();
+
+                            txtNombre.setText(est.getNombre());
+                            txtApellido.setText(est.getApellido());
+                            txtDni.setText(String.valueOf(est.getDni()));
+                            txtLegajo.setText(String.valueOf(est.getLegajo()));
+                            txtCarrera.setText(est.getCarrera());
+
+                            removeEstudiante.enableRemoveBtn(true);
+
+                        }else {
+                            throw new DontExistException("EL DNI NO ESTA ASOCIADO A NINGUN ESTUDIANTE");
+                        }
+                    }else {
+                        throw new EmptyFieldException("ANTES DE BUSCAR DEBES COMPLETAR EL CAMPO DE BUSQUEDA.");
+                    }
+
+                }catch (DontExistException | EmptyFieldException exception){
+                    JOptionPane.showMessageDialog(null,exception.getMessage());
+                }
+
+            }
+            public Estudiante getEst(){return this.est;}
+
+        }
+
+
+        BuscarBtnListener buscarBtnListener = new BuscarBtnListener();
+        estudiante=buscarBtnListener.getEst();
+
+
+        class RemoveBtnListener implements ActionListener{
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                JTextField txtNombre = removeEstudiante.getTxtNombre();
+                JTextField txtApellido = removeEstudiante.getTxtApellido();
+                JTextField txtDni = removeEstudiante.getTxtDni();
+                JTextField txtLegajo = removeEstudiante.getTxtLegajo();
+                JTextField txtCarrera = removeEstudiante.getTxtCarrera();
+                JTextField txtDniSearch  = removeEstudiante.getTxtDni();
+                Estudiante estudiante1;
+                try{
+                    if (buscarBtnListener.getEst() == null) {
+                        throw new EmptyFieldException("PRIMERO DEBES BUSCAR UN ESTUDIANTE.");
+                    }else {
+                        estudiante1=buscarBtnListener.getEst();
+
+                        estudianteRepository.remove(estudiante1);
+                        estudianteRepository.saveTree();
+                        JOptionPane.showMessageDialog(null,"ALUMNO ELIMINADO CON EXITO");
+                        txtNombre.setText("");
+                        txtApellido.setText("");
+                        txtDni.setText("");
+                        txtLegajo.setText("");
+                        txtCarrera.setText("");
+                        removeEstudiante.enableRemoveBtn(false);
+                    }
+
+                }catch (EmptyFieldException exception){
+
+                }
+
+            }
+       }
+        class VolverBtnRetListener implements ActionListener{
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                removeEstudiante.dispose();
+            }
+        }
+
+       removeEstudiante.volverBtn(new VolverBtnRetListener());
+       removeEstudiante.removeBtnListener(new RemoveBtnListener());
+       removeEstudiante.buscarBtnListener(buscarBtnListener);
+       removeEstudiante.setVisible(true);
     }
-
     public void modEstudiante() {
-        JOptionPane.showMessageDialog(null,"CREACION EN PROCESO");
+        ModEstudiante modEstudiante = new ModEstudiante();
+        Estudiante estudiante;
+        class BuscarBtnListener implements ActionListener{
+            Estudiante est=null;
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try{
+                    JTextField txtSearchDni = modEstudiante.getTxtSeatchDni();
+                    if (!txtSearchDni.getText().isEmpty()){
+                        Integer dni = Integer.valueOf(txtSearchDni.getText());
+
+                        est =estudianteRepository.find(new Estudiante(dni));
+                        if (est!=null){
+                            JTextField txtNombre = modEstudiante.getTxtNombre();
+                            JTextField txtApellido = modEstudiante.getTxtApellido();
+                            JTextField txtDni = modEstudiante.getTxtDni();
+                            JTextField txtLegajo = modEstudiante.getTxtLegajo();
+                            JTextField txtCarrera = modEstudiante.getTxtCarrera();
+
+                            txtNombre.setText(est.getNombre());
+                            txtApellido.setText(est.getApellido());
+                            txtDni.setText(String.valueOf(est.getDni()));
+                            txtLegajo.setText(String.valueOf(est.getLegajo()));
+                            txtCarrera.setText(est.getCarrera());
+
+                            modEstudiante.enableModBtn(true);
+
+                        }else {
+                            throw new DontExistException("EL DNI NO ESTA ASOCIADO A NINGUN ESTUDIANTE");
+                        }
+                    }else {
+                        throw new EmptyFieldException("ANTES DE BUSCAR DEBES COMPLETAR EL CAMPO DE BUSQUEDA.");
+                    }
+
+                }catch (DontExistException | EmptyFieldException exception){
+                    JOptionPane.showMessageDialog(null,exception.getMessage());
+                }
+
+            }
+            public Estudiante getEst(){return this.est;}
+
+        }
+
+
+        BuscarBtnListener buscarBtnListener = new BuscarBtnListener();
+        estudiante=buscarBtnListener.getEst();
+
+
+        class ModBtnListener implements ActionListener{
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+               JTextField txtNombre = modEstudiante.getTxtNombre();
+               JTextField txtApellido = modEstudiante.getTxtApellido();
+               JTextField txtDni = modEstudiante.getTxtDni();
+               JTextField txtLegajo = modEstudiante.getTxtLegajo();
+               JTextField txtCarrera = modEstudiante.getTxtCarrera();
+               JTextField txtDniSearch  = modEstudiante.getTxtDni();
+                Estudiante estudiante1;
+               try{
+                   if (buscarBtnListener.getEst() == null) {
+                       throw new EmptyFieldException("PRIMERO DEBES BUSCAR UN ESTUDIANTE.");
+                   }else {
+                       estudiante1=buscarBtnListener.getEst();
+                   }
+                   if (txtNombre.getText().isEmpty() || txtApellido.getText().isEmpty() || txtDni.getText().isEmpty() || txtLegajo.getText().isEmpty() || txtCarrera.getText().isEmpty()){
+                       throw new EmptyFieldException("TODOS LOS CAMPOS DEBEN TENER DATOS");
+                   }else {
+                       int dniNumber;
+                       int legajoNumber;
+                       try {
+                           dniNumber = Integer.parseInt(txtDni.getText());
+                       } catch (NumberFormatException ex) {
+                           throw new InvalidNumberException("El DNI debe contener solo números.");
+                       }
+                       try {
+                           legajoNumber = Integer.parseInt(txtLegajo.getText());
+                       } catch (NumberFormatException ex) {
+                           throw new InvalidNumberException("El legajo debe contener solo números.");
+                       }
+                       dniNumber = Integer.valueOf(txtDni.getText());
+                       legajoNumber = Integer.valueOf(txtLegajo.getText());
+                       estudiante1.setNombre(txtNombre.getText());
+                       estudiante1.setApellido(txtApellido.getText());
+                       estudiante1.setCarrera(txtCarrera.getText());
+                       estudiante1.setDni(dniNumber);
+                       estudiante1.setLegajo(legajoNumber);
+                       estudianteRepository.update(estudiante1);
+                       estudianteRepository.saveTree();
+                       JOptionPane.showMessageDialog(null,"MODIFICACION CORRECTAMENTE REALIZADA");
+                       txtNombre.setText("");
+                       txtApellido.setText("");
+                       txtDni.setText("");
+                       txtLegajo.setText("");
+                       txtCarrera.setText("");
+                       modEstudiante.enableModBtn(false);
+                   }
+
+               }catch (EmptyFieldException exception){
+
+               }
+
+            }
+        }
+
+        class volverBtnListener implements ActionListener{
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                modEstudiante.dispose();
+            }
+        }
+
+        modEstudiante.buscarBtnListener(buscarBtnListener);
+        modEstudiante.modBtnListener(new ModBtnListener());
+        modEstudiante.volverBtn(new volverBtnListener());
+        modEstudiante.setVisible(true);
+
     }
 
 
     public void listadoEstudiantes() {
-        JOptionPane.showMessageDialog(null,"CREACION EN PROCESO");
+
+                String[] columnaName={"Nombre", "Apellido", "DNI", "Legajo", "Carrera", "Id"};
+                Object [][] data=new Object[this.estudianteRepository.getArbolEstudiante().size()][6];
+
+
+                int row=0;
+                for(Estudiante estudiante: estudianteRepository.getArbolEstudiante() ){
+                    data[row][0] = estudiante.getNombre();
+                    data[row][1]= estudiante.getApellido();
+                    data[row][2] = estudiante.getDni();
+                    data[row][3] = estudiante.getLegajo();
+                    data[row][4] = estudiante.getCarrera();
+                    data[row][5] = estudiante.getId();
+                    row++;
+                }
+                ListadoEstudiantes listadoEstudiantes = new ListadoEstudiantes(data,columnaName);
+
     }
 }

@@ -21,6 +21,13 @@ public class Estudiante extends Persona implements Comparable<Estudiante> {
         super(dni);
     }
 
+    public Estudiante() {
+        super();
+    }
+
+    public void setPerm(int per){
+        this.permisos=per;
+    }
 
     public  int getPermisos() {
         return permisos;
@@ -52,6 +59,6 @@ public class Estudiante extends Persona implements Comparable<Estudiante> {
 
     @Override
     public int compareTo(Estudiante o) {
-        return this.getDni().compareTo(o.getDni());
+        return this.getId().compareTo(o.getId());
     }
 }

@@ -14,11 +14,15 @@ public abstract class Persona {
         this.dni = dni;
     }
 
+    public Persona() {
+    }
+
     public Persona(String nombre, String apellido, Integer dni) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
-        this.id=idAcumulable++;
+        this.id=idAcumulable;
+        idAcumulable++;
     }
 
 

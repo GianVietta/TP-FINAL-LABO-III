@@ -36,8 +36,8 @@ public class UserController {
     }
 
     public User<?> logIn() {
-        LogIn logIn = new LogIn();
         CountDownLatch latch = new CountDownLatch(1);
+        LogIn logIn = new LogIn();
         class logInListener implements ActionListener {
             private User<?> user;
 
@@ -46,6 +46,7 @@ public class UserController {
             public void actionPerformed(ActionEvent e) {
                 JTextField txtUser = logIn.getTxtUser();
                 JPasswordField txtPasword = logIn.getTxtPasword();
+
 
                 if (!txtUser.getText().isEmpty() && !txtPasword.getText().isEmpty()) {
                     try {
@@ -168,8 +169,9 @@ public class UserController {
                             user.setPasword(contraseña);
                             usersRepository.add(user);
                             usersRepository.saveUsers();
-                            logIn();
+
                             register.setVisible(false);
+                            logIn();
                         }else {
                             throw new DontMatchException("LAS CONTRASEÑAS NO COINSIDEN");
                         }

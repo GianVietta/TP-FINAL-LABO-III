@@ -5,42 +5,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6f8f930c-4b5d-46f4-9679-6296f3364f51" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/imagenes/Fondo.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/TpFinal/Exceptions/DontMatchException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/TpFinal/Exceptions/MaxDigitsException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/TpFinal/MVC/Administrativo/model/Entity/Admin.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/TpFinal/MVC/Administrativo/model/repository/AdminRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/TpFinal/MVC/Administrativo/view/MenuPrincipalAdmins.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/TpFinal/MVC/Administrativo/view/MenuPrincipalAdmins.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/TpFinal/MVC/Materia/model/repository/MateriaRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/TpFinal/MVC/Profesor/model/entity/Profesor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/TpFinal/MVC/Profesor/model/repository/ProfesorRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Materias.Json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/TpFinal/AbstractClass/Persona.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/TpFinal/AbstractClass/Persona.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/TpFinal/MVC/Administrativo/controller/administrativoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/TpFinal/MVC/Administrativo/controller/AdminController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/TpFinal/MVC/Administrativo/model/Entity/admin.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/TpFinal/MVC/Administrativo/model/repository/adminRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/TpFinal/MVC/Administrativo/view/adminView.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/TpFinal/MVC/Estudiante/model/Estudiante.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/TpFinal/MVC/Estudiante/model/entity/Estudiante.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/TpFinal/MVC/Estudiante/model/EstudianteRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/TpFinal/MVC/Estudiante/model/Repository/EstudianteRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/TpFinal/MVC/Estudiante/view/EstudiantView.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/TpFinal/MVC/Administrativo/model/Entity/Admin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/TpFinal/MVC/Administrativo/model/Entity/Admin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/TpFinal/MVC/Estudiante/model/entity/Estudiante.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/TpFinal/MVC/Estudiante/model/entity/Estudiante.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/TpFinal/MVC/Profesor/model/entity/Profesor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/TpFinal/MVC/Profesor/model/entity/Profesor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/TpFinal/MVC/Users/Controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/TpFinal/MVC/Users/Controller/UserController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/TpFinal/MVC/Users/Model/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/TpFinal/MVC/Users/Model/entity/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/TpFinal/MVC/Users/Model/repository/UsersRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/TpFinal/MVC/Users/Model/repository/UsersRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/TpFinal/MVC/Users/View/LogIn.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/TpFinal/MVC/Users/View/LogIn.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/TpFinal/MVC/Users/View/LogIn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/TpFinal/MVC/Users/View/LogIn.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/TpFinal/MVC/Users/View/Register.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/TpFinal/MVC/Users/View/Register.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/TpFinal/MVC/Users/View/Register.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/TpFinal/MVC/Users/View/Register.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/TpFinal/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/TpFinal/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Admins.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Admins.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Estudiantes.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Estudiantes.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Users.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Users.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Admins.json" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Admins.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Estudiantes.json" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Estudiantes.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Users.json" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Users.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/TpFinal/AbstractClass/Persona.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/TpFinal/AbstractClass/Persona.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/TpFinal/MVC/Administrativo/controller/administrativoController.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/TpFinal/MVC/Administrativo/model/Entity/admin.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/TpFinal/MVC/Administrativo/model/Entity/admin.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/TpFinal/MVC/Administrativo/model/repository/adminRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/TpFinal/MVC/Administrativo/model/repository/adminRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/TpFinal/MVC/Administrativo/view/adminView.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/TpFinal/MVC/Estudiante/model/Estudiante.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/TpFinal/MVC/Estudiante/model/EstudianteRepository$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/TpFinal/MVC/Estudiante/model/EstudianteRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/TpFinal/MVC/Estudiante/view/EstudiantView.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/TpFinal/MVC/Estudiante/model/entity/Estudiante.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/TpFinal/MVC/Estudiante/model/entity/Estudiante.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/TpFinal/MVC/Profesor/model/entity/Profesor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/TpFinal/MVC/Profesor/model/entity/Profesor.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/TpFinal/MVC/Users/Controller/UserController$1AlreadyRegisterListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/TpFinal/MVC/Users/Controller/UserController$1AlreadyRegisterListener.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/TpFinal/MVC/Users/Controller/UserController$1RegisterListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/TpFinal/MVC/Users/Controller/UserController$1RegisterListener.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/TpFinal/MVC/Users/Controller/UserController$1logInListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/TpFinal/MVC/Users/Controller/UserController$1logInListener.class" afterDir="false" />
@@ -49,7 +34,6 @@
       <change beforePath="$PROJECT_DIR$/target/classes/com/TpFinal/MVC/Users/Model/entity/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/TpFinal/MVC/Users/Model/entity/User.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/TpFinal/MVC/Users/Model/repository/UsersRepository$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/TpFinal/MVC/Users/Model/repository/UsersRepository$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/TpFinal/MVC/Users/Model/repository/UsersRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/TpFinal/MVC/Users/Model/repository/UsersRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/TpFinal/MVC/Users/View/LogIn.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/TpFinal/MVC/Users/View/LogIn.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/TpFinal/MVC/Users/View/Register.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/TpFinal/MVC/Users/View/Register.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/TpFinal/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/TpFinal/Main.class" afterDir="false" />
     </list>
@@ -77,20 +61,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Main.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "UI_DESIGNER_EDITOR_MODE.PaletteManager.WIDTH": "133",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Usuario/Desktop/Gian/TpFinal/TP Final III/src/imagenes",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "inlay.hints"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;UI_DESIGNER_EDITOR_MODE.PaletteManager.WIDTH&quot;: &quot;133&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Usuario/Desktop/Gian/TpFinal/TP Final III/src/imagenes&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;inlay.hints&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Usuario\Desktop\Gian\TpFinal\TP Final III\src\imagenes" />

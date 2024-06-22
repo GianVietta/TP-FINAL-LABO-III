@@ -6,6 +6,7 @@ import com.TpFinal.MVC.Estudiante.model.entity.Estudiante;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import javax.swing.*;
 import java.io.*;
 import java.lang.reflect.Type;
 import java.util.TreeSet;
@@ -78,13 +79,14 @@ public class EstudianteRepository implements IRepository<Estudiante> {
 
     @Override
     public Estudiante find(Estudiante estudiante) {
-        Estudiante encontrado=this.arbolEstudiante.ceiling(estudiante);
-        if (encontrado!=null&&encontrado.getDni().equals(estudiante.getDni())){
-            return encontrado;
+        for (Estudiante aux : this.arbolEstudiante){
+
+            if (aux.equals(estudiante)){
+                return aux;
+            }
         }
         return null;
     }
-
 
 }
 

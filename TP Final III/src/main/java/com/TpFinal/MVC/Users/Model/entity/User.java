@@ -28,6 +28,10 @@ public class User<T>{
         this.pasword = pasword;
     }
 
+    public User() {
+
+    }
+
     public T getT() {
         return t;
     }

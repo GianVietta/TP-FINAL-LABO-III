@@ -23,7 +23,7 @@ public class CreateEstudiant extends JFrame {
         this.carrera.setForeground(Color.white);
         this.setTitle("STG-GESTION DE ESTUDIANTES");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setBounds(600,200,650,300);
+        this.setBounds(600,200,500,300);
         this.add(mainPanel);
         this.setVisible(true);
 
