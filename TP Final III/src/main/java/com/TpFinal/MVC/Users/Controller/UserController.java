@@ -58,7 +58,7 @@ public class UserController {
                             if (usuario.getPasword().equals(pasword)) {
                                 logIn.setVisible(false);
                                 this.user=usuario;
-                                JOptionPane.showMessageDialog(null, "INICIO DE SECCION EXITOSO");
+                                JOptionPane.showMessageDialog(null, "INICIO DE SESION EXITOSO");
                                 latch.countDown();
                             } else {
                                 throw new DontMatchException("CONTRASEÑA INCORRECTA");
@@ -173,7 +173,7 @@ public class UserController {
                             register.setVisible(false);
                             logIn();
                         }else {
-                            throw new DontMatchException("LAS CONTRASEÑAS NO COINSIDEN");
+                            throw new DontMatchException("LAS CONTRASEÑAS NO COINCIDEN");
                         }
                     }else{
                         throw new AlreadyExistException("EL EMAIL INGRESADO YA CORRESPONDE A UN USUARIO CREADO ANTERIORMENTE.");

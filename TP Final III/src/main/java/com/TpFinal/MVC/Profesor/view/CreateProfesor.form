@@ -69,8 +69,9 @@
         <properties>
           <background color="-1"/>
           <enabled value="true"/>
+          <font size="14"/>
           <foreground color="-1"/>
-          <text value="Nombre"/>
+          <text value="Nombre:"/>
         </properties>
       </component>
       <component id="e858f" class="javax.swing.JLabel">
@@ -80,8 +81,9 @@
         <properties>
           <background color="-1"/>
           <enabled value="true"/>
+          <font size="14"/>
           <foreground color="-1"/>
-          <text value="Apellido"/>
+          <text value="Apellido:"/>
         </properties>
       </component>
       <component id="618f9" class="javax.swing.JLabel">
@@ -90,8 +92,9 @@
         </constraints>
         <properties>
           <background color="-1"/>
+          <font size="14"/>
           <foreground color="-1"/>
-          <text value="dni"/>
+          <text value="Dni:"/>
         </properties>
       </component>
       <component id="cd88c" class="javax.swing.JLabel">
@@ -100,8 +103,9 @@
         </constraints>
         <properties>
           <background color="-1"/>
+          <font size="14"/>
           <foreground color="-1"/>
-          <text value="Especialidad"/>
+          <text value="Especialidad:"/>
         </properties>
       </component>
       <component id="a0138" class="javax.swing.JButton" binding="volverButton" default-binding="true">
@@ -123,7 +127,7 @@
           <enabled value="true"/>
           <font size="20"/>
           <foreground color="-1"/>
-          <text value="Ingrese los datos del profesor"/>
+          <text value="INGRESE LOS DATOS DEL PROFESOR"/>
         </properties>
       </component>
       <hspacer id="81bd3">

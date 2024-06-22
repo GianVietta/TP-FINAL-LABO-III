@@ -40,4 +40,5 @@ public class Comision {
     public void setMapEstudiantes(HashMap<Estudiante, Integer> mapEstudiantes) {
         this.mapEstudiantes = mapEstudiantes;
     }
+
 }

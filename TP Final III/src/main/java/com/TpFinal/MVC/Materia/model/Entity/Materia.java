@@ -1,7 +1,10 @@
 package com.TpFinal.MVC.Materia.model.Entity;
 
 import com.TpFinal.MVC.Comision.entity.Comision;
+import com.TpFinal.MVC.Estudiante.model.entity.Estudiante;
+import com.TpFinal.MVC.Profesor.model.entity.Profesor;
 
+import javax.sound.sampled.spi.FormatConversionProvider;
 import java.util.HashMap;
 
 public class Materia {
@@ -58,4 +61,25 @@ public class Materia {
     public static void setIdAcc(Integer idAcc) {
         Materia.idAcc = idAcc;
     }
+
+    public Comision buscarEst(Estudiante estudiante){
+        for(Comision aux : this.mapComisiones.values()){
+            if(aux.getMapEstudiantes().containsKey(estudiante)){
+                return aux;
+            }
+        }
+        return null;
+    }
+
+    public Comision buscarPro(Profesor profesor){
+        for (Comision aux : this.mapComisiones.values()){
+            if (aux.getProfesor().equals(profesor)){
+                return aux;
+            }
+        }
+        return null;
+    }
+
+
+
 }
