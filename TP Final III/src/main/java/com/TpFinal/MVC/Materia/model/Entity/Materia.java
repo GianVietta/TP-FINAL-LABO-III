@@ -6,6 +6,7 @@ import com.TpFinal.MVC.Profesor.model.entity.Profesor;
 
 import javax.sound.sampled.spi.FormatConversionProvider;
 import java.util.HashMap;
+import java.util.Objects;
 
 public class Materia {
     private String nombre;
@@ -14,12 +15,16 @@ public class Materia {
 
     private Integer id;
 
-    private static Integer idAcc;
+    private static Integer idAcc=1;
 
+    public Materia(String nombre){
+        this.nombre = nombre;
+    }
     public Materia(String nombre, Integer codigo) {
         this.nombre = nombre;
         this.codigo = codigo;
         this.mapComisiones=new HashMap<>();
+        this.id=idAcc++;
     }
 
     public String getNombre() {
@@ -71,6 +76,11 @@ public class Materia {
         return null;
     }
 
+    @Override
+    public String toString() {
+        return nombre;
+    }
+
     public Comision buscarPro(Profesor profesor){
         for (Comision aux : this.mapComisiones.values()){
             if (aux.getProfesor().equals(profesor)){
@@ -80,6 +90,24 @@ public class Materia {
         return null;
     }
 
+    public Comision buscarCom(Integer com){
+        for (Comision aux : this.mapComisiones.values()){
+            if (aux.getNumeroComision().equals(com)){
+                return aux;
+            }
+        }
+        return null;
+    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Materia materia = (Materia) o;
+        return Objects.equals(nombre, materia.nombre);
+    }
 
-
+    @Override
+    public int hashCode() {
+        return Objects.hash(nombre);
+    }
 }

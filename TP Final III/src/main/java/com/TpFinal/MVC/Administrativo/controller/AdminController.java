@@ -2,6 +2,7 @@ package com.TpFinal.MVC.Administrativo.controller;
 
 import com.TpFinal.MVC.Administrativo.model.repository.AdminRepository;
 import com.TpFinal.MVC.Administrativo.view.MenuAdmin;
+import com.TpFinal.MVC.Comision.Controller.ComisionController;
 import com.TpFinal.MVC.Estudiante.controller.EstudianteController;
 import com.TpFinal.MVC.Estudiante.model.Repository.EstudianteRepository;
 import com.TpFinal.MVC.Estudiante.model.entity.Estudiante;
@@ -17,12 +18,15 @@ public class AdminController {
     private ProfesorControler profesorControler;
     private EstudianteController estudianteController;
     private MateriaController materiaController;
+
+    private ComisionController comisionController;
     private AdminRepository adminRepository;
 
-    public AdminController(ProfesorControler profesorControler, EstudianteController estudianteController, MateriaController materiaController, AdminRepository adminRepository) {
+    public AdminController(ProfesorControler profesorControler, EstudianteController estudianteController, MateriaController materiaController, AdminRepository adminRepository,ComisionController comisionController) {
         this.profesorControler = profesorControler;
         this.estudianteController = estudianteController;
         this.materiaController=materiaController;
+        this.comisionController=comisionController;
         this.adminRepository = adminRepository;
     }
 
@@ -111,6 +115,35 @@ public class AdminController {
                     materiaController.viewMatList();
             }
         });
+
+        menuAdmin.addComListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            comisionController.agregarComision();
+            }
+        });
+
+        menuAdmin.removeComListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                comisionController.removeComision();
+            }
+        });
+
+        menuAdmin.modComListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                comisionController.modComision();
+            }
+        });
+
+        menuAdmin.listComListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                comisionController.listComision();
+            }
+        });
+
     }
 
 

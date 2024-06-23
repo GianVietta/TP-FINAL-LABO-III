@@ -31,7 +31,7 @@ public class ListaProfesores {
         btnVolver.setForeground(Color.white);
 
 
-        JFrame jFrame = new JFrame("Lista de estudiantes");
+        JFrame jFrame = new JFrame("Lista de Profesores");
         listaProfesoresPanel.setBackground(new Color(59,59,59));
         jFrame.add(listaProfesoresPanel);
         listaProfesoresPanel.setBackground(new Color(70, 72, 75));

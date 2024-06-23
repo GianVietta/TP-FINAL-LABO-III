@@ -36,4 +36,9 @@ public class Profesor extends Persona {
     public void setPermisos(int i) {
         this.permisos=i;
     }
+
+    @Override
+    public String toString() {
+        return new String(getNombre()+" "+getApellido());
+    }
 }

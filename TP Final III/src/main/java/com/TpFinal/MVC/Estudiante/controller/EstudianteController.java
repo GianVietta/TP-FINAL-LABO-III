@@ -7,10 +7,8 @@ import com.TpFinal.Exceptions.InvalidNumberException;
 import com.TpFinal.MVC.Administrativo.view.MenuAdmin;
 import com.TpFinal.MVC.Estudiante.model.Repository.EstudianteRepository;
 import com.TpFinal.MVC.Estudiante.model.entity.Estudiante;
-import com.TpFinal.MVC.Estudiante.view.CreateEstudiant;
-import com.TpFinal.MVC.Estudiante.view.ListadoEstudiantes;
-import com.TpFinal.MVC.Estudiante.view.ModEstudiante;
-import com.TpFinal.MVC.Estudiante.view.RemoveEstudiante;
+import com.TpFinal.MVC.Estudiante.view.*;
+import com.TpFinal.MVC.Materia.model.Entity.Materia;
 import com.TpFinal.MVC.Materia.model.repository.MateriaRepository;
 
 import javax.swing.*;
@@ -27,6 +25,10 @@ public class EstudianteController {
         this.materiaRepository = materiaRepository;
     }
 
+    public void menuEstudiantes(){
+        MenuEstudiantes menuEstudiantes = new MenuEstudiantes();
+        menuEstudiantes.setVisible(true);
+    }
     public void agregarEstudiante(){
         CreateEstudiant createEstudiant = new CreateEstudiant();
         class CreateListener implements ActionListener {
@@ -297,6 +299,16 @@ public class EstudianteController {
                        }
                        dniNumber = Integer.valueOf(txtDni.getText());
                        legajoNumber = Integer.valueOf(txtLegajo.getText());
+                       if (dniNumber!=estudiante1.getDni()){
+                           if (estudianteRepository.find(new Estudiante(dniNumber))!=null){
+                               throw new AlreadyExistException("EL DNI NUEVO YA PERTENECE A OTRO ALUMNO");
+                           }
+                       }
+                       if (legajoNumber!=estudiante1.getLegajo()){
+                           if (estudianteRepository.findxLegajo(legajoNumber)!=null){
+                               throw new AlreadyExistException("EL NUEVO LEGAJO YA PERTENECE A UN ALUMNO");
+                           }
+                       }
                        estudiante1.setNombre(txtNombre.getText());
                        estudiante1.setApellido(txtApellido.getText());
                        estudiante1.setCarrera(txtCarrera.getText());
@@ -313,8 +325,8 @@ public class EstudianteController {
                        modEstudiante.enableModBtn(false);
                    }
 
-               }catch (EmptyFieldException exception){
-
+               }catch (EmptyFieldException| InvalidNumberException | AlreadyExistException exception){
+                    JOptionPane.showMessageDialog(null,exception.getMessage());
                }
 
             }
@@ -336,10 +348,8 @@ public class EstudianteController {
 
 
     public void listadoEstudiantes() {
-
                 String[] columnaName={"Nombre", "Apellido", "DNI", "Legajo", "Carrera", "Id"};
                 Object [][] data=new Object[this.estudianteRepository.getArbolEstudiante().size()][6];
-
 
                 int row=0;
                 for(Estudiante estudiante: estudianteRepository.getArbolEstudiante() ){
@@ -352,6 +362,30 @@ public class EstudianteController {
                     row++;
                 }
                 ListadoEstudiantes listadoEstudiantes = new ListadoEstudiantes(data,columnaName);
-
     }
+
+
+    public void matricularseAUnaMateria() {
+        Matricularse matricularse = new Matricularse();
+        class CreateListener implements ActionListener{
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               JTextField materiatxt = matricularse.getMatriculacion();
+
+               if(materiatxt.getText().isEmpty()){
+                   throw new EmptyFieldException("Tiene que ingresar una materia para matricularse");
+               }
+
+                Materia materia = new Materia(materiatxt.getText());
+
+               for (Materia aux : materiaRepository.getListaMaterias()){
+                   if (materiaRepository.getListaMaterias().equals(materia)){
+
+                   }
+               }
+            }
+        }
+    }
+
 }

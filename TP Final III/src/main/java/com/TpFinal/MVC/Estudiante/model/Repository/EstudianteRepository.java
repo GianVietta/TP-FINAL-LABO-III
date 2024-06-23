@@ -88,6 +88,16 @@ public class EstudianteRepository implements IRepository<Estudiante> {
         return null;
     }
 
+    public Estudiante findxLegajo(Integer legajo){
+        for (Estudiante aux : this.arbolEstudiante){
+
+            if (aux.getLegajo().equals(legajo)){
+                return aux;
+            }
+        }
+        return null;
+    }
+
 }
 
 

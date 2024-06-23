@@ -4,9 +4,11 @@ import com.TpFinal.Exceptions.AlreadyExistException;
 import com.TpFinal.Exceptions.DontExistException;
 import com.TpFinal.Exceptions.EmptyFieldException;
 import com.TpFinal.Exceptions.InvalidNumberException;
+import com.TpFinal.MVC.Comision.entity.Comision;
 import com.TpFinal.MVC.Estudiante.model.entity.Estudiante;
 import com.TpFinal.MVC.Estudiante.view.ModEstudiante;
 import com.TpFinal.MVC.Estudiante.view.RemoveEstudiante;
+import com.TpFinal.MVC.Materia.model.Entity.Materia;
 import com.TpFinal.MVC.Materia.model.repository.MateriaRepository;
 import com.TpFinal.MVC.Profesor.view.CreateProfesor;
 import com.TpFinal.MVC.Profesor.view.ListaProfesores;
@@ -157,7 +159,11 @@ public class ProfesorControler {
                         throw new EmptyFieldException("PRIMERO DEBES BUSCAR UN ESTUDIANTE.");
                     }else {
                         profesor1=buscarBtnListener.getPro();
-
+                        for (Materia mat : materiaRepository.getListaMaterias()){
+                            if (mat.buscarPro(profesor1)!=null){
+                               throw new AlreadyExistException("EL PROFESOR ESTA ACTUALMENTE EN UNA COMISION PRIMERO DEBES LIBERARLO");
+                            }
+                        }
                         profesorRepository.remove(profesor1);
                         profesorRepository.saveHash();
                         JOptionPane.showMessageDialog(null,"PROFESOR ELIMINADO CON EXITO");
@@ -168,8 +174,8 @@ public class ProfesorControler {
                         removeProfesor.enableRemoveBtn(false);
                     }
 
-                }catch (EmptyFieldException exception){
-
+                }catch (EmptyFieldException | AlreadyExistException exception){
+                    JOptionPane.showMessageDialog(null,exception.getMessage());
                 }
 
             }
@@ -245,11 +251,19 @@ public class ProfesorControler {
                 JTextField txtEspecialidad = modProfesor.getEspecialidad();
                 JTextField txtBuscarDni  = modProfesor.getDni();
                 Profesor profesor1;
+                Materia materia=null;
+                Comision com = null;
                 try{
                     if (buscarBtnListener.getPro() == null) {
                         throw new EmptyFieldException("PRIMERO DEBES BUSCAR UN ESTUDIANTE.");
                     }else {
                         profesor1=buscarBtnListener.getPro();
+                        for (Materia mat : materiaRepository.getListaMaterias()){
+                            if (mat.buscarPro(profesor1)!=null){
+                                materia=mat;
+                                com=materia.buscarPro(profesor1);
+                            }
+                        }
                     }
                     if (txtNombre.getText().isEmpty() || txtApellido.getText().isEmpty() || txtDni.getText().isEmpty() || txtEspecialidad.getText().isEmpty()){
                         throw new EmptyFieldException("TODOS LOS CAMPOS DEBEN TENER DATOS");
@@ -265,8 +279,15 @@ public class ProfesorControler {
                         profesor1.setApellido(txtApellido.getText());
                         profesor1.setDni(dniNumber);
                         profesor1.setEspecialidad(txtEspecialidad.getText());
+
                         profesorRepository.update(profesor1);
                         profesorRepository.saveHash();
+                        if (materia!=null){
+                         com.setProfesor(profesor1);
+                         materia.getMapComisiones().put(com.getNumeroComision(),com);
+                         materiaRepository.update(materia);
+                         materiaRepository.saveList();
+                        }
                         JOptionPane.showMessageDialog(null,"MODIFICACION CORRECTAMENTE REALIZADA");
                         txtNombre.setText("");
                         txtApellido.setText("");

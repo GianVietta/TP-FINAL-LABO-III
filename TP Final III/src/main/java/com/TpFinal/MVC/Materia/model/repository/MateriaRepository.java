@@ -43,7 +43,7 @@ public class MateriaRepository implements IRepository<Materia> {
 
 
     public void setIdAcc(){
-        Integer id=0;
+        Integer id=1;
         for (Materia materia : this.listaMaterias){
             if (id<materia.getId()){
                 id= materia.getId();
@@ -74,5 +74,18 @@ public class MateriaRepository implements IRepository<Materia> {
             }
         }
         return null;
+    }
+
+    public Materia findXcode(Integer code){
+        for (Materia materia : this.listaMaterias){
+            if (materia.getCodigo().equals(code)){
+                return materia;
+            }
+        }
+        return null;
+    }
+
+    public ArrayList<Materia> getListaMaterias() {
+        return listaMaterias;
     }
 }

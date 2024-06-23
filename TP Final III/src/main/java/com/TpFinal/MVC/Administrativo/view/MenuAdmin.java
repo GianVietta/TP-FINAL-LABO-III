@@ -23,10 +23,14 @@ public class MenuAdmin extends JFrame{
     private JMenuItem listarPro;
     private JMenu gestionMaterias;
     private JMenuItem agregaMat;
+    private JMenuItem addCom;
+    private JMenuItem modCom;
+    private JMenuItem remCom;
     private JMenuItem eliminarMat;
     private JMenuItem modificarMat;
     private JMenuItem listarMat;
-    
+    private JMenuItem listarComs;
+
 
 
 
@@ -43,8 +47,6 @@ public class MenuAdmin extends JFrame{
        
 
 
-
-
        this.menuBar = new JMenuBar();
 
        this.gestionEstudiantes = new JMenu();
@@ -53,7 +55,7 @@ public class MenuAdmin extends JFrame{
        gestionEstudiantes.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
        //gestionEstudiantes.setBackground(new Color(59,59,59));
        //gestionEstudiantes.setForeground(Color.white);
-       gestionEstudiantes.setUI(new CustomMenuUI());
+        gestionEstudiantes.setUI(new CustomMenuUI());
 
        this.agregaEst = new JMenuItem("Agregar Estudiante");
        agregaEst.setFont(new Font("Arial Black",Font.TYPE1_FONT,14));
@@ -114,25 +116,50 @@ public class MenuAdmin extends JFrame{
         agregaMat.setBackground(new Color(59,59,59));
         agregaMat.setForeground(Color.white);
 
+        this.addCom = new JMenuItem("Agregar Comision");
+        addCom.setFont(new Font("Arial Black",Font.TYPE1_FONT,14));
+        addCom.setBackground(new Color(59,59,59));
+        addCom.setForeground(Color.white);
+
+
         this.eliminarMat = new JMenuItem("Eliminar Materia");
         eliminarMat.setFont(new Font("Arial Black",Font.TYPE1_FONT,14));
         eliminarMat.setBackground(new Color(59,59,59));
         eliminarMat.setForeground(Color.white);
+
+        this.remCom = new JMenuItem("Eliminar Comision");
+        remCom.setFont(new Font("Arial Black",Font.TYPE1_FONT,14));
+        remCom.setBackground(new Color(59,59,59));
+        remCom.setForeground(Color.white);
 
         this.modificarMat = new JMenuItem("Modificar Materia");
         modificarMat.setFont(new Font("Arial Black",Font.TYPE1_FONT,14));
         modificarMat.setBackground(new Color(59,59,59));
         modificarMat.setForeground(Color.white);
 
+        this.modCom = new JMenuItem("Modificar Comision");
+        modCom.setFont(new Font("Arial Black",Font.TYPE1_FONT,14));
+        modCom.setBackground(new Color(59,59,59));
+        modCom.setForeground(Color.white);
+
         this.listarMat = new JMenuItem("Listar Materia");
         listarMat.setFont(new Font("Arial Black",Font.TYPE1_FONT,14));
         listarMat.setForeground(Color.white);
         listarMat.setBackground(new Color(59,59,59));
 
+        this.listarComs = new JMenuItem("Listar Comisiones");
+        listarComs.setFont(new Font("Arial Black",Font.TYPE1_FONT,14));
+        listarComs.setForeground(Color.white);
+        listarComs.setBackground(new Color(59,59,59));
+
         gestionMaterias.add(agregaMat);
         gestionMaterias.add(eliminarMat);
         gestionMaterias.add(modificarMat);
         gestionMaterias.add(listarMat);
+        gestionMaterias.add(addCom);
+        gestionMaterias.add(remCom);
+        gestionMaterias.add(modCom);
+        gestionMaterias.add(listarComs);
 
 
         gestionMaterias.setFont(new Font("Arial Black",Font.TYPE1_FONT,18));
@@ -202,5 +229,14 @@ public class MenuAdmin extends JFrame{
     public void removeMatListener(ActionListener actionListener){this.eliminarMat.addActionListener(actionListener);}
     public void modMatListener(ActionListener actionListener){this.modificarMat.addActionListener(actionListener);}
     public void viewMatListener(ActionListener actionListener){this.listarMat.addActionListener(actionListener);}
+    public void addComListener(ActionListener actionListener){this.addCom.addActionListener(actionListener);}
+
+    public void removeComListener(ActionListener actionListener){this.remCom.addActionListener(actionListener);}
+
+    public void modComListener(ActionListener actionListener){this.modCom.addActionListener(actionListener);}
+
+    public void listComListener(ActionListener actionListener){this.listarComs.addActionListener(actionListener);}
+
+
 
 }

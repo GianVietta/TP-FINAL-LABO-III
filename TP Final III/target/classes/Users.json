@@ -1,1 +1,1 @@
-[{"user":"Gian","password":"1234","email":"gianfvietta07@gmail.com","id":2,"t":{"permisos":0,"nombre":"Gian","apellido":"Vietta","dni":46420089,"id":6,"type":"Admin"}}]
+[{"user":"Gian","password":"1234","email":"gianfvietta07@gmail.com","id":1,"t":{"permisos":0,"nombre":"Gian","apellido":"Vietta","dni":46420089,"id":6,"type":"Admin"}},{"user":"Tamy","password":"1234","email":"tam","id":2,"t":{"carrera":"Medicina","legajo":366473,"permisos":2,"nombre":"Tamara","apellido":"Vietta","dni":43303064,"id":3,"type":"Estudiante"}}]
