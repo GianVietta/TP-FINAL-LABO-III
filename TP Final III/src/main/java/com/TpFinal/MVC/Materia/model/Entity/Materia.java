@@ -69,11 +69,21 @@ public class Materia {
 
     public Comision buscarEst(Estudiante estudiante){
         for(Comision aux : this.mapComisiones.values()){
-            if(aux.getMapEstudiantes().containsKey(estudiante)){
+            if(aux.getMapEstudiantes().containsKey(estudiante.getId())){
                 return aux;
             }
         }
         return null;
+    }
+
+    public boolean consultEstNota(Estudiante estudiante){
+        for(Comision aux : this.mapComisiones.values()){
+            if(aux.getMapEstudiantes().get(estudiante.getId())!=null) {
+                if (!aux.getMapEstudiantes().get(estudiante.getId()).equals(""))
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
@@ -103,11 +113,11 @@ public class Materia {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Materia materia = (Materia) o;
-        return Objects.equals(nombre, materia.nombre);
+        return Objects.equals(id, materia.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(nombre);
+        return Objects.hash(id);
     }
 }

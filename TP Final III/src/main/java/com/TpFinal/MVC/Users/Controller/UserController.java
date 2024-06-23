@@ -84,7 +84,6 @@ public class UserController {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                logIn.setVisible(false);
                 register();
             }
         }
@@ -105,6 +104,7 @@ public class UserController {
 
     public void register(){
         Register register = new Register();
+        CountDownLatch latchA = new CountDownLatch(1);
         class RegisterListener implements ActionListener{
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -137,6 +137,7 @@ public class UserController {
                          if (!usersRepository.consultProf(pro)) {
                              User<Profesor> user = new User<>(pro);
                              cargarUsuario(user);
+
                          }else {
                              throw new AlreadyExistException("EL DNI INGRESADO YA CUENTA CON UNA CUENTA");
                          }
@@ -170,8 +171,9 @@ public class UserController {
                             usersRepository.add(user);
                             usersRepository.saveUsers();
 
-                            register.setVisible(false);
-                            logIn();
+                            register.dispose();
+
+
                         }else {
                             throw new DontMatchException("LAS CONTRASEÑAS NO COINCIDEN");
                         }
@@ -189,8 +191,8 @@ public class UserController {
         class AlreadyRegisterListener implements ActionListener{
             @Override
             public void actionPerformed(ActionEvent e) {
-                register.setVisible(false);
-                logIn();
+                register.dispose();
+
             }
         }
 

@@ -98,6 +98,14 @@ public class EstudianteRepository implements IRepository<Estudiante> {
         return null;
     }
 
+    public Estudiante findxId(Integer id) {
+        for (Estudiante aux : this.arbolEstudiante){
+            if (aux.getId().equals(id)){
+                return aux;
+            }
+        }
+        return null;
+    }
 }
 
 

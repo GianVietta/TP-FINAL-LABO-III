@@ -5,29 +5,33 @@ import com.TpFinal.Exceptions.DontExistException;
 import com.TpFinal.Exceptions.EmptyFieldException;
 import com.TpFinal.Exceptions.InvalidNumberException;
 import com.TpFinal.MVC.Comision.entity.Comision;
+import com.TpFinal.MVC.Estudiante.model.Repository.EstudianteRepository;
 import com.TpFinal.MVC.Estudiante.model.entity.Estudiante;
 import com.TpFinal.MVC.Estudiante.view.ModEstudiante;
 import com.TpFinal.MVC.Estudiante.view.RemoveEstudiante;
+import com.TpFinal.MVC.Estudiante.view.VerCursadas;
 import com.TpFinal.MVC.Materia.model.Entity.Materia;
 import com.TpFinal.MVC.Materia.model.repository.MateriaRepository;
-import com.TpFinal.MVC.Profesor.view.CreateProfesor;
-import com.TpFinal.MVC.Profesor.view.ListaProfesores;
+import com.TpFinal.MVC.Profesor.view.*;
 import com.TpFinal.MVC.Profesor.model.entity.Profesor;
 import com.TpFinal.MVC.Profesor.model.repository.ProfesorRepository;
-import com.TpFinal.MVC.Profesor.view.ModProfesor;
-import com.TpFinal.MVC.Profesor.view.RemoveProfesor;
+import com.TpFinal.MVC.Users.Model.entity.User;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
 
 public class ProfesorControler {
     private ProfesorRepository profesorRepository;
     private MateriaRepository materiaRepository;
 
-    public ProfesorControler(ProfesorRepository profesorRepository, MateriaRepository materiaRepository) {
+    private EstudianteRepository estudianteRepository;
+
+    public ProfesorControler(ProfesorRepository profesorRepository, MateriaRepository materiaRepository,EstudianteRepository estudianteRepository) {
         this.profesorRepository = profesorRepository;
         this.materiaRepository = materiaRepository;
+        this.estudianteRepository=estudianteRepository;
     }
 
     public ProfesorRepository getProfesorRepository() {
@@ -334,5 +338,169 @@ public class ProfesorControler {
         ListaProfesores listaProfesores = new ListaProfesores(data,columnaName);
     }
 
+
+    public void menuProfesor(User<?> u) {
+        MenuProfe menuProfe = new MenuProfe();
+
+        menuProfe.gestionNotasListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                gestionNotas((Profesor) u.getT());
+            }
+        });
+
+        menuProfe.verMateriasListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                verMaterias((Profesor) u.getT());
+            }
+        });
+
+        menuProfe.cambiarDatosListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            cambiarDatos((User<Profesor>) u);
+            }
+        });
+
+        menuProfe.cambiarContraseniaListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+
+
+
+
+
+
+
+    }
+
+    private void verMaterias(Profesor profesor) {
+
+            String[] columnaName={"CODIGO","NOMBRE DE MATERIA","NUMERO COMISION","PROFESOR"};
+            Object [][] data=new Object[this.materiaRepository.getListaMaterias().size()][4];
+
+            int row=0;
+            for(Materia materia: materiaRepository.getListaMaterias() ){
+                if (materia.buscarPro(profesor)!=null) {
+                        Comision comision = materia.buscarPro(profesor);
+                        data[row][0] = materia.getCodigo();
+                        data[row][1] = materia.getNombre();
+                        data[row][2] = comision.getNumeroComision();
+                        data[row][3] = comision.getProfesor();
+                        row++;
+                }
+            }
+            VerCursadas verCursadas= new VerCursadas(data,columnaName);
+
+
+
+    }
+
+    public void gestionNotas(Profesor profesor){
+        GestionNotas gestionNotas = new GestionNotas();
+        JComboBox<Comision> comBox = gestionNotas.getBoxCom();
+        JComboBox<Materia> matBox = gestionNotas.getBoxMat();
+        for (Materia mat : materiaRepository.getListaMaterias()){
+            if (mat.buscarPro(profesor)!=null){
+                matBox.addItem(mat);
+            }
+        }
+
+        class BuscarBtnListener implements ActionListener{
+            Materia materia;
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            try {
+
+                if (matBox.getSelectedIndex()==0){
+                    throw new EmptyFieldException("PRIMERO DEBES ELEGIR UNA MATERIA");
+                }
+                Materia selectedMat =(Materia) matBox.getSelectedItem();
+                for (Comision com : selectedMat.getMapComisiones().values()){
+                    if (com.getProfesor().equals(profesor)){
+                        comBox.addItem(com);
+                    }
+                }
+                gestionNotas.getBtnLlenar().setEnabled(true);
+            }catch (EmptyFieldException ex){
+                JOptionPane.showMessageDialog(null,ex.getMessage());
+            }
+
+            }
+        }
+
+        gestionNotas.buscarBtnListener(new BuscarBtnListener());
+
+        class LlenarBtnListener implements ActionListener{
+            GestionNotas.CustomTableModel model;
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Comision selectedCom =(Comision) comBox.getSelectedItem();
+                HashMap<Integer,String> estudiantes = selectedCom.getMapEstudiantes();
+                Object[][] data = new Object[estudiantes.size()][5];
+                int index = 0;
+                for (HashMap.Entry<Integer, String> entry : estudiantes.entrySet()) {
+                    Estudiante estudiante=estudianteRepository.findxId(entry.getKey());
+                    data[index][0] = estudiante.getId();
+                    data[index][1] = estudiante.getDni();
+                    data[index][2] = estudiante.getNombre() + estudiante.getApellido();
+                    data[index][3] = estudiante.getLegajo();
+                    data[index][4] = entry.getValue();
+                    index++;
+                }
+                String[] columnNames = {"Id", "Dni","Nombre y Apellido", "Legajo","Nota"};
+
+                model = new GestionNotas.CustomTableModel(data,columnNames);
+                gestionNotas.getBtnGuardar().setEnabled(true);
+                gestionNotas.updateTable(model);
+            }
+        }
+        LlenarBtnListener llenarBtnListener = new LlenarBtnListener();
+        gestionNotas.llenarBtnListener(llenarBtnListener);
+
+        class saveBtnListener implements ActionListener {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                GestionNotas.CustomTableModel model = llenarBtnListener.model;
+                int rowCount = model.getRowCount();
+                Comision com = (Comision) comBox.getSelectedItem();
+                Materia selectedMat = (Materia) matBox.getSelectedItem();
+
+                for (int i = 0; i < rowCount; i++) {
+                    Integer studentId = (Integer) model.getValueAt(i, 0);
+                    String nota = (String) model.getValueAt(i, 4);
+
+                    Estudiante estudiante = estudianteRepository.findxId(studentId);
+                    JOptionPane.showMessageDialog(null,estudiante.getId()+" "+estudiante.getNombre());
+                    if (estudiante != null) {
+                        com.getMapEstudiantes().remove(studentId);
+                        com.getMapEstudiantes().put(estudiante.getId(),nota);
+                        selectedMat.getMapComisiones().remove(com);
+                        selectedMat.getMapComisiones().put(com.getNumeroComision(),com);
+                        materiaRepository.update(selectedMat);
+                        materiaRepository.saveList();
+                    }
+                }
+                comBox.removeAllItems();
+
+                gestionNotas.getBtnLlenar().setEnabled(false);
+                gestionNotas.getBtnGuardar().setEnabled(false);
+            }
+        }
+        gestionNotas.guardarBtnListener(new saveBtnListener());
+        gestionNotas.setVisible(true);
+
+
+
+    }
+
+    public void cambiarDatos(User<Profesor> user){
+
+    }
 
 }

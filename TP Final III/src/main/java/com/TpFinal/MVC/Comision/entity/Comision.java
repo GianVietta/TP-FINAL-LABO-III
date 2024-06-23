@@ -9,7 +9,7 @@ public class Comision {
 
     private Profesor profesor;
     private Integer numeroComision;
-    private HashMap<Estudiante,Integer> mapEstudiantes;
+    private HashMap<Integer,String> mapEstudiantes;
 
     public Comision(Profesor profesor, Integer numeroComision) {
         this.profesor = profesor;
@@ -33,12 +33,16 @@ public class Comision {
         this.numeroComision = numeroComision;
     }
 
-    public HashMap<Estudiante, Integer> getMapEstudiantes() {
+    public HashMap<Integer, String> getMapEstudiantes() {
         return mapEstudiantes;
     }
 
-    public void setMapEstudiantes(HashMap<Estudiante, Integer> mapEstudiantes) {
+    public void setMapEstudiantes(HashMap<Integer, String> mapEstudiantes) {
         this.mapEstudiantes = mapEstudiantes;
     }
 
+    @Override
+    public String toString() {
+        return "COMISION: "+(String.valueOf(numeroComision))+" Profesor: "+profesor.getNombre()+" "+profesor.getApellido();
+    }
 }

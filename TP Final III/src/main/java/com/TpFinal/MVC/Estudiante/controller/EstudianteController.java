@@ -5,15 +5,19 @@ import com.TpFinal.Exceptions.DontExistException;
 import com.TpFinal.Exceptions.EmptyFieldException;
 import com.TpFinal.Exceptions.InvalidNumberException;
 import com.TpFinal.MVC.Administrativo.view.MenuAdmin;
+import com.TpFinal.MVC.Comision.entity.Comision;
 import com.TpFinal.MVC.Estudiante.model.Repository.EstudianteRepository;
 import com.TpFinal.MVC.Estudiante.model.entity.Estudiante;
 import com.TpFinal.MVC.Estudiante.view.*;
 import com.TpFinal.MVC.Materia.model.Entity.Materia;
 import com.TpFinal.MVC.Materia.model.repository.MateriaRepository;
+import com.TpFinal.MVC.Materia.view.ListarMat;
+import com.TpFinal.MVC.Users.Model.entity.User;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.concurrent.CountDownLatch;
 
 public class EstudianteController {
@@ -25,10 +29,197 @@ public class EstudianteController {
         this.materiaRepository = materiaRepository;
     }
 
-    public void menuEstudiantes(){
+    public void menuEstudiantes(User<?> user){
         MenuEstudiantes menuEstudiantes = new MenuEstudiantes();
+        menuEstudiantes.verMateriasListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                verMaterias((Estudiante) user.getT());
+            }
+        });
+        menuEstudiantes.verCursadasListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                verCursada((Estudiante) user.getT());
+            }
+        });
+        menuEstudiantes.matricularseListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                matricularse((Estudiante) user.getT());
+                materiaRepository.saveList();
+            }
+        });
+        menuEstudiantes.darDeBajaListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                darDeBaja((Estudiante) user.getT());
+            }
+        });
         menuEstudiantes.setVisible(true);
     }
+
+
+    public void verMaterias(Estudiante estudiante){
+        String[] columnaName={"CODIGO","NOMBRE DE MATERIA","NOTA"};
+        ArrayList<Materia> materiasFiltradas=new ArrayList<>();
+
+
+        int row=0;
+        for(Materia materia: materiaRepository.getListaMaterias() ){
+            if (materia.consultEstNota(estudiante)){
+                materiasFiltradas.add(materia);
+            }
+        }
+        Object [][] data=new Object[materiasFiltradas.size()][3];
+        for (Materia materia:materiasFiltradas){
+            Comision comision= materia.buscarEst(estudiante);
+            data[row][0] = materia.getCodigo();
+            data[row][1]= materia.getNombre();
+            data[row][2]=comision.getMapEstudiantes().get(estudiante.getId());
+            row++;
+        }
+
+        ListaMaterias listarMat = new ListaMaterias(data,columnaName);
+    }
+
+    public void verCursada(Estudiante estudiante){
+        String[] columnaName={"CODIGO","NOMBRE DE MATERIA","NUMERO COMISION","PROFESOR"};
+
+        ArrayList<Materia> materiasFiltradas = new ArrayList<>();
+        int row=0;
+        for(Materia materia: materiaRepository.getListaMaterias() ){
+            if (materia.buscarEst(estudiante)!=null) {
+                if (!materia.consultEstNota(estudiante)) {
+                   materiasFiltradas.add(materia);
+                }
+            }
+        }
+        Object [][] data=new Object[materiasFiltradas.size()][4];
+        for (Materia materia : materiasFiltradas){
+            Comision comision = materia.buscarEst(estudiante);
+            data[row][0] = materia.getCodigo();
+            data[row][1] = materia.getNombre();
+            data[row][2] = comision.getNumeroComision();
+            data[row][3] = comision.getProfesor();
+        }
+
+        row++;
+        VerCursadas verCursadas= new VerCursadas(data,columnaName);
+    }
+
+    public void darDeBaja(Estudiante estudiante){
+        DarDeBaja darDeBaja = new DarDeBaja();
+        JComboBox<Materia> matBox = darDeBaja.getMatBox();
+
+        for(Materia materia: materiaRepository.getListaMaterias() ){
+            if (materia.buscarEst(estudiante)!=null) {
+                if (!materia.consultEstNota(estudiante)) {
+                    matBox.addItem(materia);
+                }
+            }
+        }
+
+        class bajaBtnListener implements ActionListener{
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try{
+                    if (matBox.getSelectedIndex()==0){
+                        throw new EmptyFieldException("PRIMERO DEBES SELECCIONAR UNA MATERIA");
+                    }
+
+                    Materia materia =(Materia) matBox.getSelectedItem();
+                    int i = matBox.getSelectedIndex();
+                    Comision com = materia.buscarEst(estudiante);
+                    com.getMapEstudiantes().remove(estudiante.getId());
+                    materia.getMapComisiones().remove(com);
+                    materia.getMapComisiones().put(com.getNumeroComision(),com);
+                    materiaRepository.update(materia);
+                    materiaRepository.saveList();
+                    matBox.removeItemAt(i);
+
+                }catch (EmptyFieldException ex){
+                    JOptionPane.showMessageDialog(null,ex);
+                }
+            }
+        }
+        darDeBaja.darDeBajaButton(new bajaBtnListener());
+        darDeBaja.setVisible(true);
+
+    }
+
+    public void matricularse(Estudiante estudiante){
+        Matricularse matricularse = new Matricularse();
+        JComboBox<Comision> comBox = matricularse.getComBox();
+        JComboBox<Materia> matsBox = matricularse.getMatBox();
+        for (Materia mat : materiaRepository.getListaMaterias()){
+            if (mat.getMapComisiones()!=null) {
+                matsBox.addItem(mat);
+            }
+        }
+        class ElegirBtnListener implements ActionListener{
+            Materia materia;
+
+            public ElegirBtnListener() {
+            }
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            try{
+                if (matsBox.getSelectedIndex()==0){
+                    throw new EmptyFieldException("DEBES ELEGIR UNA MATERIA");
+                }
+                materia=(Materia) matsBox.getSelectedItem();
+                if (materia.buscarEst(estudiante)!=null) {
+                throw new AlreadyExistException("YA ESTAS MATRICULADO EN OTRA COMISION DE ESTA MISMA MATERIA");
+                }
+                if (materia.getMapComisiones().isEmpty()){
+                    throw new DontExistException("LA MATERIA ELEJIDA NO TIENE COMISIONES");
+                }
+                for (Comision comision : materia.getMapComisiones().values()){
+                    comBox.addItem(comision);
+                }
+                matricularse.getBtnMatricularse().setEnabled(true);
+            }catch (EmptyFieldException |DontExistException | AlreadyExistException ex){
+                JOptionPane.showMessageDialog(null,ex.getMessage());
+            }
+            }
+
+            public Materia getMateria() {
+                return materia;
+            }
+        }
+
+        ElegirBtnListener elegirBtnListener = new ElegirBtnListener();
+        Materia materia = elegirBtnListener.getMateria();
+
+
+
+        class MatBtnListener implements ActionListener{
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               try {
+
+                   Comision com = (Comision) comBox.getSelectedItem();
+                   Materia mat=(Materia) elegirBtnListener.getMateria();
+                   com.getMapEstudiantes().put(estudiante.getId(),"");
+                   mat.getMapComisiones().remove(com);
+                   mat.getMapComisiones().put(com.getNumeroComision(),com);
+                   materiaRepository.update(mat);
+                   materiaRepository.saveList();
+                   comBox.removeAllItems();
+                   matricularse.getBtnMatricularse().setEnabled(false);
+               }catch (EmptyFieldException ex){
+                   JOptionPane.showMessageDialog(null,ex.getMessage());
+               }
+            }
+        }
+        matricularse.elegirMatListener(elegirBtnListener);
+        matricularse.matricularseBtnListener(new MatBtnListener());
+        matricularse.setVisible(true);
+
+    }
+
     public void agregarEstudiante(){
         CreateEstudiant createEstudiant = new CreateEstudiant();
         class CreateListener implements ActionListener {
@@ -365,27 +556,6 @@ public class EstudianteController {
     }
 
 
-    public void matricularseAUnaMateria() {
-        Matricularse matricularse = new Matricularse();
-        class CreateListener implements ActionListener{
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
-               JTextField materiatxt = matricularse.getMatriculacion();
-
-               if(materiatxt.getText().isEmpty()){
-                   throw new EmptyFieldException("Tiene que ingresar una materia para matricularse");
-               }
-
-                Materia materia = new Materia(materiatxt.getText());
-
-               for (Materia aux : materiaRepository.getListaMaterias()){
-                   if (materiaRepository.getListaMaterias().equals(materia)){
-
-                   }
-               }
-            }
-        }
-    }
 
 }
