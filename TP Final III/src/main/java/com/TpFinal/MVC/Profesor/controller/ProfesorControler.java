@@ -1,12 +1,10 @@
 package com.TpFinal.MVC.Profesor.controller;
 
-import com.TpFinal.Exceptions.AlreadyExistException;
-import com.TpFinal.Exceptions.DontExistException;
-import com.TpFinal.Exceptions.EmptyFieldException;
-import com.TpFinal.Exceptions.InvalidNumberException;
+import com.TpFinal.Exceptions.*;
 import com.TpFinal.MVC.Comision.entity.Comision;
 import com.TpFinal.MVC.Estudiante.model.Repository.EstudianteRepository;
 import com.TpFinal.MVC.Estudiante.model.entity.Estudiante;
+import com.TpFinal.MVC.Estudiante.view.CambiarDatos;
 import com.TpFinal.MVC.Estudiante.view.ModEstudiante;
 import com.TpFinal.MVC.Estudiante.view.RemoveEstudiante;
 import com.TpFinal.MVC.Estudiante.view.VerCursadas;
@@ -16,6 +14,7 @@ import com.TpFinal.MVC.Profesor.view.*;
 import com.TpFinal.MVC.Profesor.model.entity.Profesor;
 import com.TpFinal.MVC.Profesor.model.repository.ProfesorRepository;
 import com.TpFinal.MVC.Users.Model.entity.User;
+import com.TpFinal.MVC.Users.Model.repository.UsersRepository;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -25,6 +24,7 @@ import java.util.HashMap;
 public class ProfesorControler {
     private ProfesorRepository profesorRepository;
     private MateriaRepository materiaRepository;
+    private UsersRepository usersRepository = new UsersRepository();
 
     private EstudianteRepository estudianteRepository;
 
@@ -44,16 +44,16 @@ public class ProfesorControler {
 
     public void agregarProfesor() {
         CreateProfesor createProfesor = new CreateProfesor();
-        class CreateListener implements ActionListener {
 
+        class CreateListener implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JTextField nombretxt = createProfesor.getNombre();
                 JTextField apellidotxt = createProfesor.getApellido();
                 JTextField dnitxt = createProfesor.getDni();
-                JTextField especialidad = createProfesor.getEspecialidad();
+                JTextField especialidadtxt = createProfesor.getEspecialidad();
                 try {
-                    if (nombretxt.getText().isEmpty() || apellidotxt.getText().isEmpty() || dnitxt.getText().isEmpty() || especialidad.getText().isEmpty()) {
+                    if (nombretxt.getText().isEmpty() || apellidotxt.getText().isEmpty() || dnitxt.getText().isEmpty() || especialidadtxt.getText().isEmpty()) {
                         throw new EmptyFieldException("Todos los campos son obligatorios.");
                     }
 
@@ -61,33 +61,41 @@ public class ProfesorControler {
                     try {
                         dninumber = Integer.parseInt(dnitxt.getText());
                     } catch (NumberFormatException ex) {
-                        throw new InvalidNumberException("El dni solo debe contener numeros");
+                        throw new InvalidNumberException("El DNI solo debe contener números.");
                     }
-                    dninumber = Integer.valueOf(dnitxt.getText());
 
-                    Profesor profesor = new Profesor(nombretxt.getText(), apellidotxt.getText(), dninumber, especialidad.getText());
+                    String nombre, apellido, especialidad;
+                    try {
+                        nombre = validateStringField(nombretxt.getText(), "nombre");
+                        apellido = validateStringField(apellidotxt.getText(), "apellido");
+                        especialidad = validateStringField(especialidadtxt.getText(), "especialidad");
+                    } catch (DontMatchException ex) {
+                        // Maneja la excepción aquí
+                        throw new DontMatchException("Error: " + ex.getMessage());
+                    }
+
+                    Profesor profesor = new Profesor(nombre, apellido, dninumber, especialidad);
 
                     if (profesorRepository.find(profesor) != null) {
-                        throw new AlreadyExistException("El profesor ya existe");
+                        throw new AlreadyExistException("El profesor ya existe.");
                     }
+
                     profesorRepository.add(profesor);
                     profesorRepository.saveHash();
                     nombretxt.setText("");
                     apellidotxt.setText("");
                     dnitxt.setText("");
-                    especialidad.setText("");
+                    especialidadtxt.setText("");
                     JOptionPane.showMessageDialog(createProfesor, "Profesor ingresado con éxito.");
-                } catch (EmptyFieldException | InvalidNumberException | AlreadyExistException ex) {
-                    JOptionPane.showMessageDialog(createProfesor, "Error: " + ex.getMessage());
+                } catch (EmptyFieldException | InvalidNumberException | DontMatchException | AlreadyExistException ex) {
+                    JOptionPane.showMessageDialog(createProfesor, ex.getMessage());
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(createProfesor, "Error inesperado: " + ex.getMessage());
                 }
             }
-
         }
 
         class VolverListener implements ActionListener {
-
             @Override
             public void actionPerformed(ActionEvent e) {
                 createProfesor.dispose();
@@ -99,6 +107,18 @@ public class ProfesorControler {
         createProfesor.volverBtnListener(new VolverListener());
         createProfesor.setVisible(true);
     }
+
+    // Método para validar los campos de texto
+    private static String validateStringField(String field, String fieldName) throws DontMatchException {
+        if (field == null || field.trim().isEmpty()) {
+            throw new DontMatchException("El " + fieldName + " no puede estar vacío.");
+        }
+        if (!field.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$")) { // Solo permite letras y espacios
+            throw new DontMatchException(fieldName + " solo puede contener letras y espacios.");
+        }
+        return field;
+    }
+
 
     public void eliminarProfesor() {
         RemoveProfesor removeProfesor = new RemoveProfesor();
@@ -259,7 +279,7 @@ public class ProfesorControler {
                 Comision com = null;
                 try{
                     if (buscarBtnListener.getPro() == null) {
-                        throw new EmptyFieldException("PRIMERO DEBES BUSCAR UN ESTUDIANTE.");
+                        throw new EmptyFieldException("PRIMERO DEBES BUSCAR UN PROFESOR.");
                     }else {
                         profesor1=buscarBtnListener.getPro();
                         for (Materia mat : materiaRepository.getListaMaterias()){
@@ -363,12 +383,6 @@ public class ProfesorControler {
             }
         });
 
-        menuProfe.cambiarContraseniaListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
 
 
 
@@ -400,52 +414,51 @@ public class ProfesorControler {
 
     }
 
-    public void gestionNotas(Profesor profesor){
+    public void gestionNotas(Profesor profesor) {
         GestionNotas gestionNotas = new GestionNotas();
         JComboBox<Comision> comBox = gestionNotas.getBoxCom();
         JComboBox<Materia> matBox = gestionNotas.getBoxMat();
-        for (Materia mat : materiaRepository.getListaMaterias()){
-            if (mat.buscarPro(profesor)!=null){
+        for (Materia mat : materiaRepository.getListaMaterias()) {
+            if (mat.buscarPro(profesor) != null) {
                 matBox.addItem(mat);
             }
         }
 
-        class BuscarBtnListener implements ActionListener{
+        class BuscarBtnListener implements ActionListener {
             Materia materia;
+
             @Override
             public void actionPerformed(ActionEvent e) {
-            try {
-
-                if (matBox.getSelectedIndex()==0){
-                    throw new EmptyFieldException("PRIMERO DEBES ELEGIR UNA MATERIA");
-                }
-                Materia selectedMat =(Materia) matBox.getSelectedItem();
-                for (Comision com : selectedMat.getMapComisiones().values()){
-                    if (com.getProfesor().equals(profesor)){
-                        comBox.addItem(com);
+                try {
+                    if (matBox.getSelectedIndex() == 0) {
+                        throw new EmptyFieldException("PRIMERO DEBES ELEGIR UNA MATERIA");
                     }
+                    Materia selectedMat = (Materia) matBox.getSelectedItem();
+                    for (Comision com : selectedMat.getMapComisiones().values()) {
+                        if (com.getProfesor().equals(profesor)) {
+                            comBox.addItem(com);
+                        }
+                    }
+                    gestionNotas.getBtnLlenar().setEnabled(true);
+                } catch (EmptyFieldException ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage());
                 }
-                gestionNotas.getBtnLlenar().setEnabled(true);
-            }catch (EmptyFieldException ex){
-                JOptionPane.showMessageDialog(null,ex.getMessage());
-            }
-
             }
         }
 
         gestionNotas.buscarBtnListener(new BuscarBtnListener());
 
-        class LlenarBtnListener implements ActionListener{
+        class LlenarBtnListener implements ActionListener {
             GestionNotas.CustomTableModel model;
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                Comision selectedCom =(Comision) comBox.getSelectedItem();
-                HashMap<Integer,String> estudiantes = selectedCom.getMapEstudiantes();
+                Comision selectedCom = (Comision) comBox.getSelectedItem();
+                HashMap<Integer, String> estudiantes = selectedCom.getMapEstudiantes();
                 Object[][] data = new Object[estudiantes.size()][5];
                 int index = 0;
                 for (HashMap.Entry<Integer, String> entry : estudiantes.entrySet()) {
-                    Estudiante estudiante=estudianteRepository.findxId(entry.getKey());
+                    Estudiante estudiante = estudianteRepository.findxId(entry.getKey());
                     data[index][0] = estudiante.getId();
                     data[index][1] = estudiante.getDni();
                     data[index][2] = estudiante.getNombre() + estudiante.getApellido();
@@ -453,17 +466,18 @@ public class ProfesorControler {
                     data[index][4] = entry.getValue();
                     index++;
                 }
-                String[] columnNames = {"Id", "Dni","Nombre y Apellido", "Legajo","Nota"};
+                String[] columnNames = {"Id", "Dni", "Nombre y Apellido", "Legajo", "Nota"};
 
-                model = new GestionNotas.CustomTableModel(data,columnNames);
+                model = new GestionNotas.CustomTableModel(data, columnNames);
                 gestionNotas.getBtnGuardar().setEnabled(true);
                 gestionNotas.updateTable(model);
             }
         }
+
         LlenarBtnListener llenarBtnListener = new LlenarBtnListener();
         gestionNotas.llenarBtnListener(llenarBtnListener);
 
-        class saveBtnListener implements ActionListener {
+        class SaveBtnListener implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 GestionNotas.CustomTableModel model = llenarBtnListener.model;
@@ -475,15 +489,26 @@ public class ProfesorControler {
                     Integer studentId = (Integer) model.getValueAt(i, 0);
                     String nota = (String) model.getValueAt(i, 4);
 
-                    Estudiante estudiante = estudianteRepository.findxId(studentId);
-                    JOptionPane.showMessageDialog(null,estudiante.getId()+" "+estudiante.getNombre());
-                    if (estudiante != null) {
-                        com.getMapEstudiantes().remove(studentId);
-                        com.getMapEstudiantes().put(estudiante.getId(),nota);
-                        selectedMat.getMapComisiones().remove(com);
-                        selectedMat.getMapComisiones().put(com.getNumeroComision(),com);
-                        materiaRepository.update(selectedMat);
-                        materiaRepository.saveList();
+                    // Validar que la nota esté dentro del rango de 1 a 10
+                    try {
+                        int notaInt = Integer.parseInt(nota);
+                        if (notaInt < 1 || notaInt > 10) {
+                            throw new IllegalArgumentException("La nota debe estar entre 1 y 10.");
+                        }
+
+                        Estudiante estudiante = estudianteRepository.findxId(studentId);
+                        if (estudiante != null) {
+                            com.getMapEstudiantes().remove(studentId);
+                            com.getMapEstudiantes().put(estudiante.getId(), nota);
+                            selectedMat.getMapComisiones().remove(com);
+                            selectedMat.getMapComisiones().put(com.getNumeroComision(), com);
+                            materiaRepository.update(selectedMat);
+                            materiaRepository.saveList();
+                        }
+                    } catch (NumberFormatException ex) {
+                        JOptionPane.showMessageDialog(null, "La nota debe ser un número entero.");
+                    } catch (IllegalArgumentException ex) {
+                        JOptionPane.showMessageDialog(null, ex.getMessage());
                     }
                 }
                 comBox.removeAllItems();
@@ -492,15 +517,111 @@ public class ProfesorControler {
                 gestionNotas.getBtnGuardar().setEnabled(false);
             }
         }
-        gestionNotas.guardarBtnListener(new saveBtnListener());
+
+        gestionNotas.guardarBtnListener(new SaveBtnListener());
         gestionNotas.setVisible(true);
-
-
-
     }
+
 
     public void cambiarDatos(User<Profesor> user){
+            ModDatos cambiarDatos = new ModDatos();
+
+            class BuscarBtnListener implements ActionListener {
+                User<Profesor> usr = user;
+
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    try {
+                        JTextField txtContrasenia = cambiarDatos.getContrasenia();
+                        if (!txtContrasenia.getText().isEmpty()) {
+                            String password = txtContrasenia.getText();
+
+                            if (password.equals(usr.getPasword())) {
+                                JTextField txtUsuario = cambiarDatos.getUsuario();
+                                JTextField txtContraseniaNueva = cambiarDatos.getNuevaContrasenia();
+                                JTextField txtRepetirContrasenia = cambiarDatos.getRepetirContraseña();
+
+                                txtUsuario.setText(usr.getUser());
+                                txtContrasenia.setText(usr.getPasword());
+                                txtContraseniaNueva.setText("");
+                                txtRepetirContrasenia.setText("");
+
+                                cambiarDatos.enabledButton(true);
+                            } else {
+                                throw new DontExistException("LA CONTRASEÑA NO ESTÁ ASOCIADA A NINGÚN USUARIO");
+                            }
+                        } else {
+                            throw new EmptyFieldException("ANTES DE BUSCAR DEBES COMPLETAR EL CAMPO DE CONTRASEÑA.");
+                        }
+                    } catch (DontExistException | EmptyFieldException exception) {
+                        JOptionPane.showMessageDialog(null, exception.getMessage());
+                    }
+                }
+
+                public User<Profesor> getUsr() {
+                    return this.usr;
+                }
+            }
+
+            BuscarBtnListener buscarBtnListener = new BuscarBtnListener();
+            cambiarDatos.confirmarButton(buscarBtnListener);
+
+            class ModBtnListener implements ActionListener {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    JTextField txtUsuario = cambiarDatos.getUsuario();
+                    JTextField txtContrasenia = cambiarDatos.getContrasenia();
+                    JTextField txtContraseniaNueva = cambiarDatos.getNuevaContrasenia();
+                    JTextField txtRepetirContrasenia = cambiarDatos.getRepetirContraseña();
+                    User<Profesor> user1;
+
+                    try {
+                        if (buscarBtnListener.getUsr() == null) {
+                            throw new EmptyFieldException("PRIMERO DEBES BUSCAR UN USUARIO.");
+                        } else {
+                            user1 = buscarBtnListener.getUsr();
+                        }
+
+                        if (txtUsuario.getText().isEmpty() || txtContraseniaNueva.getText().isEmpty() || txtRepetirContrasenia.getText().isEmpty()) {
+                            throw new EmptyFieldException("TODOS LOS CAMPOS DEBEN TENER DATOS");
+                        } else if (!txtContraseniaNueva.getText().equals(txtRepetirContrasenia.getText())) {
+                            throw new DontMatchException("LAS CONTRASEÑAS NO COINCIDEN");
+                        } else {
+                            String newUsername = txtUsuario.getText();
+                            String newPassword = txtContraseniaNueva.getText();
+
+                            if (!newUsername.equals(user1.getUser()) && usersRepository.consultarUsuario(newUsername) != null) {
+                                throw new AlreadyExistException("EL NUEVO NOMBRE DE USUARIO YA PERTENECE A OTRO USUARIO");
+                            }
+
+                            user1.setUser(newUsername);
+                            user1.setPasword(newPassword);
+                            usersRepository.update(user1);
+                            usersRepository.saveUsers();
+                            JOptionPane.showMessageDialog(null, "MODIFICACIÓN REALIZADA CORRECTAMENTE");
+                            txtUsuario.setText("");
+                            txtContrasenia.setText("");
+                            txtContraseniaNueva.setText("");
+                            txtRepetirContrasenia.setText("");
+                            cambiarDatos.enabledButton(false);
+                        }
+                    } catch (EmptyFieldException | DontMatchException | AlreadyExistException exception) {
+                        JOptionPane.showMessageDialog(null, exception.getMessage());
+                    }
+                }
+            }
+
+            class VolverBtnListener implements ActionListener {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    cambiarDatos.dispose();
+                }
+            }
+
+            cambiarDatos.cambiarButton(new ModBtnListener());
+            cambiarDatos.volverButton(new VolverBtnListener());
+            cambiarDatos.setVisible(true);
+        }
 
     }
 
-}

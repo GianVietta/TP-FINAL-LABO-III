@@ -1,9 +1,6 @@
 package com.TpFinal.MVC.Estudiante.controller;
 
-import com.TpFinal.Exceptions.AlreadyExistException;
-import com.TpFinal.Exceptions.DontExistException;
-import com.TpFinal.Exceptions.EmptyFieldException;
-import com.TpFinal.Exceptions.InvalidNumberException;
+import com.TpFinal.Exceptions.*;
 import com.TpFinal.MVC.Administrativo.view.MenuAdmin;
 import com.TpFinal.MVC.Comision.entity.Comision;
 import com.TpFinal.MVC.Estudiante.model.Repository.EstudianteRepository;
@@ -13,6 +10,7 @@ import com.TpFinal.MVC.Materia.model.Entity.Materia;
 import com.TpFinal.MVC.Materia.model.repository.MateriaRepository;
 import com.TpFinal.MVC.Materia.view.ListarMat;
 import com.TpFinal.MVC.Users.Model.entity.User;
+import com.TpFinal.MVC.Users.Model.repository.UsersRepository;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -23,7 +21,7 @@ import java.util.concurrent.CountDownLatch;
 public class EstudianteController {
     private EstudianteRepository estudianteRepository;
     private MateriaRepository materiaRepository;
-
+    private UsersRepository usersRepository = new UsersRepository();
     public EstudianteController(EstudianteRepository estudianteRepository, MateriaRepository materiaRepository) {
         this.estudianteRepository = estudianteRepository;
         this.materiaRepository = materiaRepository;
@@ -54,6 +52,13 @@ public class EstudianteController {
             @Override
             public void actionPerformed(ActionEvent e) {
                 darDeBaja((Estudiante) user.getT());
+            }
+        });
+          menuEstudiantes.cambiarDatosListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                modUser((User<Estudiante>) user);
             }
         });
         menuEstudiantes.setVisible(true);
@@ -220,10 +225,112 @@ public class EstudianteController {
 
     }
 
-    public void agregarEstudiante(){
+
+    public void modUser(User<Estudiante> user) {
+        CambiarDatos cambiarDatos = new CambiarDatos();
+
+        class BuscarBtnListener implements ActionListener {
+            User<Estudiante> usr = user;  // Utilizamos el usuario pasado como parámetro
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    JTextField txtContrasenia = cambiarDatos.getContrasenia();
+                    if (!txtContrasenia.getText().isEmpty()) {
+                        String password = txtContrasenia.getText();
+
+                        if (password.equals(usr.getPasword())) {
+                            JTextField txtUsuario = cambiarDatos.getUsuario();
+                            JTextField txtContraseniaNueva = cambiarDatos.getContraseniaNueva();
+                            JTextField txtRepetirContrasenia = cambiarDatos.getRepetirContrasenia();
+
+                            txtUsuario.setText(usr.getUser());
+                            txtContrasenia.setText(usr.getPasword());
+                            txtContraseniaNueva.setText("");
+                            txtRepetirContrasenia.setText("");
+
+                            cambiarDatos.enabledButton(true);
+                        } else {
+                            throw new DontExistException("LA CONTRASEÑA NO ESTÁ ASOCIADA A NINGÚN USUARIO");
+                        }
+                    } else {
+                        throw new EmptyFieldException("ANTES DE BUSCAR DEBES COMPLETAR EL CAMPO DE CONTRASEÑA.");
+                    }
+                } catch (DontExistException | EmptyFieldException exception) {
+                    JOptionPane.showMessageDialog(null, exception.getMessage());
+                }
+            }
+
+            public User<Estudiante> getUsr() {
+                return this.usr;
+            }
+        }
+
+        BuscarBtnListener buscarBtnListener = new BuscarBtnListener();
+        cambiarDatos.confirmarButton(buscarBtnListener);
+
+        class ModBtnListener implements ActionListener {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JTextField txtUsuario = cambiarDatos.getUsuario();
+                JTextField txtContrasenia = cambiarDatos.getContrasenia();
+                JTextField txtContraseniaNueva = cambiarDatos.getContraseniaNueva();
+                JTextField txtRepetirContrasenia = cambiarDatos.getRepetirContrasenia();
+                User<Estudiante> user1;
+
+                try {
+                    if (buscarBtnListener.getUsr() == null) {
+                        throw new EmptyFieldException("PRIMERO DEBES BUSCAR UN USUARIO.");
+                    } else {
+                        user1 = buscarBtnListener.getUsr();
+                    }
+
+                    if (txtUsuario.getText().isEmpty() || txtContraseniaNueva.getText().isEmpty() || txtRepetirContrasenia.getText().isEmpty()) {
+                        throw new EmptyFieldException("TODOS LOS CAMPOS DEBEN TENER DATOS");
+                    } else if (!txtContraseniaNueva.getText().equals(txtRepetirContrasenia.getText())) {
+                        throw new DontMatchException("LAS CONTRASEÑAS NO COINCIDEN");
+                    } else {
+                        String newUsername = txtUsuario.getText();
+                        String newPassword = txtContraseniaNueva.getText();
+
+                        if (!newUsername.equals(user1.getUser()) && usersRepository.consultarUsuario(newUsername) != null) {
+                            throw new AlreadyExistException("EL NUEVO NOMBRE DE USUARIO YA PERTENECE A OTRO USUARIO");
+                        }
+
+                        user1.setUser(newUsername);
+                        user1.setPasword(newPassword);
+                        usersRepository.update(user1);
+                        usersRepository.saveUsers();
+                        JOptionPane.showMessageDialog(null, "MODIFICACIÓN REALIZADA CORRECTAMENTE");
+                        txtUsuario.setText("");
+                        txtContrasenia.setText("");
+                        txtContraseniaNueva.setText("");
+                        txtRepetirContrasenia.setText("");
+                        cambiarDatos.enabledButton(false);
+                    }
+                } catch (EmptyFieldException | DontMatchException | AlreadyExistException exception) {
+                    JOptionPane.showMessageDialog(null, exception.getMessage());
+                }
+            }
+        }
+
+        class VolverBtnListener implements ActionListener {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cambiarDatos.dispose();
+            }
+        }
+
+        cambiarDatos.cambiarButton(new ModBtnListener());
+        cambiarDatos.setVisible(true);
+    }
+
+
+
+    public void agregarEstudiante() {
         CreateEstudiant createEstudiant = new CreateEstudiant();
+
         class CreateListener implements ActionListener {
-            
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -249,11 +356,19 @@ public class EstudianteController {
                     } catch (NumberFormatException ex) {
                         throw new InvalidNumberException("El legajo debe contener solo números.");
                     }
-                    dniNumber = Integer.valueOf(dniText.getText());
-                    legajoNumber = Integer.valueOf(legajoText.getText());
 
-                    Estudiante nuevoEstudiante = new Estudiante(nombreText.getText(), apellidoText.getText(), dniNumber, legajoNumber, carreraText.getText());
+                    String nombre, apellido, carrera;
 
+                    try {
+                        nombre = validateStringField(nombreText.getText(), "nombre");
+                        apellido = validateStringField(apellidoText.getText(), "apellido");
+                        carrera = validateStringField(carreraText.getText(), "carrera");
+                    } catch (DontMatchException ex) {
+                        // Maneja la excepción aquí
+                        throw new DontMatchException("Error: " + ex.getMessage());
+                    }
+
+                    Estudiante nuevoEstudiante = new Estudiante(nombre, apellido, dniNumber, legajoNumber, carrera);
 
                     if (estudianteRepository.find(nuevoEstudiante) != null) {
                         throw new AlreadyExistException("El estudiante ya existe.");
@@ -268,30 +383,37 @@ public class EstudianteController {
                     createEstudiant.getCarreraField().setText("");
 
                     JOptionPane.showMessageDialog(createEstudiant, "Estudiante ingresado con éxito.");
-                } catch (EmptyFieldException | InvalidNumberException | AlreadyExistException ex) {
-                    JOptionPane.showMessageDialog(createEstudiant, "Error: " + ex.getMessage());
+                } catch (EmptyFieldException | InvalidNumberException | DontMatchException | AlreadyExistException ex) {
+                    JOptionPane.showMessageDialog(createEstudiant, ex.getMessage());
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(createEstudiant, "Error inesperado: " + ex.getMessage());
                 }
             }
-            
         }
 
-        class volverListener implements ActionListener{
-
+        class VolverListener implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
-               createEstudiant.dispose();
+                createEstudiant.dispose();
             }
         }
 
-
         CreateListener listener = new CreateListener();
-        createEstudiant.volverBottonListener(new volverListener());
+        createEstudiant.volverBottonListener(new VolverListener());
         createEstudiant.createBtnListener(listener);
         createEstudiant.setVisible(true);
-
     }
+
+    private static String validateStringField(String field, String fieldName) throws DontMatchException {
+        if (field == null || field.trim().isEmpty()) {
+            throw new DontMatchException("El " + fieldName + " no puede estar vacío.");
+        }
+        if (!field.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$")) { // Solo permite letras y espacios
+            throw new DontMatchException(fieldName + " solo puede contener letras y espacios.");
+        }
+        return field;
+    }
+
 
 
     public EstudianteRepository getEstudianteRepository() {

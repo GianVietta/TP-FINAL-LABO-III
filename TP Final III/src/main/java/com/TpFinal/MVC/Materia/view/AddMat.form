@@ -30,6 +30,7 @@
         </constraints>
         <properties>
           <background color="-12171189"/>
+          <foreground color="-1"/>
         </properties>
       </component>
       <component id="64431" class="javax.swing.JLabel">

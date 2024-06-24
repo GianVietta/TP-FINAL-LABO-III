@@ -29,6 +29,7 @@ import java.lang.reflect.Array;
 
 
 public class Main {
+    
     public static void main(String[] args) {
         AdminRepository adminRepository = new AdminRepository();
         ProfesorRepository profesorRepository = new ProfesorRepository();

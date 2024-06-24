@@ -20,7 +20,7 @@ import java.util.Map;
 public class UsersRepository implements IRepository<User<?>> {
     private HashSet<User<?>> setUsuarios;
     private Gson gson;
-    private static String PATH = "TP Final III/src/main/resources/Users.json";
+    private static String PATH = "C:\\Users\\sofit\\IdeaProjects\\TP-FINAL-LABO-III-main (8)\\TP-FINAL-LABO-III-main\\TP Final III\\src\\main\\resources\\Users.json";
 
 
     public UsersRepository() {
@@ -188,4 +188,14 @@ public class UsersRepository implements IRepository<User<?>> {
             return userObject;
         }
     }
+
+    public User<?> consultarPorContrasenia(String contrasenia){
+        for (User<?> user : this.setUsuarios){
+            if (user.getPasword().equals(contrasenia)){
+                return user;
+            }
+        }
+        return null;
+    }
+
 }

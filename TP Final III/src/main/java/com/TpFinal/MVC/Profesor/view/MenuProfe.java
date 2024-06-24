@@ -12,9 +12,7 @@ public class MenuProfe
         private JMenu misMaterias;
         private JMenuItem verMaterias;
         private JMenuItem gestionNotas;
-
         private JMenu opciones;
-        private JMenuItem cambiarContrasenia;
         private JMenuItem cambiarDatos;
         private JMenuItem salir;
 
@@ -54,11 +52,6 @@ public class MenuProfe
             opciones.setFont(new Font("Arial Black", Font.TYPE1_FONT, 18));
             opciones.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 
-            this.cambiarContrasenia = new JMenuItem("Cambiar Contraseña");
-            cambiarContrasenia.setFont(new Font("Arial Black", Font.TYPE1_FONT, 14));
-            cambiarContrasenia.setBackground(new Color(59,59,59));
-            cambiarContrasenia.setForeground(Color.white);
-
             this.cambiarDatos = new JMenuItem("Cambiar Datos");
             cambiarDatos.setFont(new Font("Arial Black", Font.TYPE1_FONT, 14));
             cambiarDatos.setBackground(new Color(59,59,59));
@@ -74,7 +67,6 @@ public class MenuProfe
                     dispose();
                 }
             });
-            opciones.add(cambiarContrasenia);
             opciones.add(cambiarDatos);
             opciones.addSeparator();
             opciones.add(salir);
@@ -102,9 +94,6 @@ public class MenuProfe
             this.gestionNotas.addActionListener(actionListener);
         }
 
-        public void cambiarContraseniaListener(ActionListener actionListener) {
-            this.cambiarContrasenia.addActionListener(actionListener);
-        }
 
         public void cambiarDatosListener(ActionListener actionListener) {
             this.cambiarDatos.addActionListener(actionListener);

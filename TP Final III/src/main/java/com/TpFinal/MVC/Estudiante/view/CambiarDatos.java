@@ -6,9 +6,8 @@ import java.awt.event.ActionListener;
 
 public class CambiarDatos extends JFrame{
     private JPanel panelCambiar;
-    private JTextField apellido;
-    private JTextField nombre;
-    private JTextField dni;
+    private JTextField repetirContrasenia;
+    private JTextField contraseniaNueva;
     private JTextField usuario;
     private JTextField contrasenia;
     private JButton confirmarButton;
@@ -17,9 +16,8 @@ public class CambiarDatos extends JFrame{
 
     public CambiarDatos(){
 
-        apellido.setForeground(Color.white);
-        nombre.setForeground(Color.white);
-        dni.setForeground(Color.white);
+        repetirContrasenia.setForeground(Color.white);
+        contraseniaNueva.setForeground(Color.white);
         usuario.setForeground(Color.white);
         contrasenia.setForeground(Color.white);
         this.setTitle("STG-GESTION DE ESTUDIANTES");
@@ -29,16 +27,12 @@ public class CambiarDatos extends JFrame{
         this.setVisible(true);
     }
 
-    public JTextField getApellido() {
-        return apellido;
+    public JTextField getRepetirContrasenia() {
+        return repetirContrasenia;
     }
 
-    public JTextField getNombre() {
-        return nombre;
-    }
-
-    public JTextField getDni() {
-        return dni;
+    public JTextField getContraseniaNueva() {
+        return contraseniaNueva;
     }
 
     public JTextField getUsuario() {
@@ -57,7 +51,11 @@ public class CambiarDatos extends JFrame{
         cambiarButton.addActionListener(listener);
     }
 
-    public void volverButtonCambiarDatos(ActionListener listener){
+    public void enabledButton(boolean enabled){
+        confirmarButton.setEnabled(true);
+    }
+
+    public void volverButton(ActionListener listener){
         volverButton.addActionListener(listener);
     }
 }
