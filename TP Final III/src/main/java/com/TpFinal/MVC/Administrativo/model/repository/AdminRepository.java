@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class AdminRepository implements IRepository<Admin> {
     private Gson gson = new Gson();
-    private static String PATH = "C:\\Users\\sofit\\IdeaProjects\\TP-FINAL-LABO-III-main (8)\\TP-FINAL-LABO-III-main\\TP Final III\\src\\main\\resources\\Admins.json";
+    private static String PATH = "TP Final III/src/main/resources/Admins.json";
     private ArrayList<Admin> adminList;
 
     public AdminRepository() {

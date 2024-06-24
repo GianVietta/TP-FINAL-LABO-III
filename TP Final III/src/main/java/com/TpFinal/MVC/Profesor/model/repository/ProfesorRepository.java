@@ -12,7 +12,7 @@ import java.util.HashSet;
 
 public class ProfesorRepository implements IRepository<Profesor> {
     private Gson gson = new Gson();
-    private static String PATH = "C:\\Users\\sofit\\IdeaProjects\\TP-FINAL-LABO-III-main (8)\\TP-FINAL-LABO-III-main\\TP Final III\\src\\main\\resources\\Profesores.json";
+    private static String PATH = "TP Final III/src/main/resources/Profesores.json";
     private HashSet<Profesor> profesorHashSet;
 
     public ProfesorRepository() {

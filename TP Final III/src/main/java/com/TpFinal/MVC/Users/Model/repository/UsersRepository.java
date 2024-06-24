@@ -20,7 +20,7 @@ import java.util.Map;
 public class UsersRepository implements IRepository<User<?>> {
     private HashSet<User<?>> setUsuarios;
     private Gson gson;
-    private static String PATH = "C:\\Users\\sofit\\IdeaProjects\\TP-FINAL-LABO-III-main (8)\\TP-FINAL-LABO-III-main\\TP Final III\\src\\main\\resources\\Users.json";
+    private static String PATH = "TP Final III/src/main/resources/Users.json";
 
 
     public UsersRepository() {

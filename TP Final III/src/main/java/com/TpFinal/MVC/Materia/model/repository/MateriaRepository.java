@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class MateriaRepository implements IRepository<Materia> {
     private ArrayList<Materia> listaMaterias;
     private Gson gson = new Gson();
-    private static String PATH = "C:\\Users\\sofit\\IdeaProjects\\TP-FINAL-LABO-III-main (8)\\TP-FINAL-LABO-III-main\\TP Final III\\src\\main\\resources\\Materias.Json";
+    private static String PATH = "TP Final III/src/main/resources/Materias.Json";
 
     public MateriaRepository() {
         loadList();

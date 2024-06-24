@@ -14,7 +14,7 @@ import java.util.TreeSet;
 public class EstudianteRepository implements IRepository<Estudiante> {
     private TreeSet<Estudiante> arbolEstudiante;
     private Gson gson = new Gson();
-    private static String PATH = "C:\\Users\\sofit\\IdeaProjects\\TP-FINAL-LABO-III-main (8)\\TP-FINAL-LABO-III-main\\TP Final III\\src\\main\\resources\\Estudiantes.json";
+    private static String PATH = "TP Final III/src/main/resources/Estudiantes.json";
 
     public EstudianteRepository() {
         loadTree();
